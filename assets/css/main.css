@@ -22,7 +22,7 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #233342; /* Default color used for the majority of the text content across the entire website */
+  --default-color: #0f1317; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #233342; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #244989; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --judul-color: #8eb4f6; /* Ini warna itu judul 
@@ -734,7 +734,7 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  padding: 80px 0;
+  padding: 50px 0;
 }
 
 #hero {
@@ -744,7 +744,7 @@ section,
       no-repeat center center;
   background-size: cover;
   color: white;
-  padding: 100px 0;
+  padding: 80px 0;
   z-index: 1;
 }
 
@@ -1040,6 +1040,46 @@ section,
   margin-bottom: 1.2rem;
 }
 
+.icon-box-custom {
+  background-color: #f8f9fa; /* bg-light */
+  color: var(--accent-color); /* Bootstrap primary */
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25); /* shadow-sm */
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem; /* fs-5 */
+}
+
+.icon-box-custom:hover {
+  background-color: var(--accent-color); /* primary */
+  color: var(--background-color);
+}
+.point-label {
+  font-size: 1.25rem; /* memperbesar ukuran teks */
+  font-weight: 500;
+  color: #212529;
+}
+
+.point-desc {
+  text-align: justify;
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  line-height: 1.5;
+}
+
+.point-label .tooltip {
+  cursor: help;
+  color: var(--default-color);
+  transition: color 0.2s ease;
+}
+
+.tooltip:hover {
+  color: var(--accent-color); /* warna biru lebih gelap saat hover */
+}
+
 .about .about-content-box .progress-item .progress-title {
   font-weight: 600;
   color: var(--heading-color);
@@ -1302,6 +1342,10 @@ section,
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+.span-2 {
+  grid-column: span 2;
 }
 
 .stats .stats-card {
@@ -1919,6 +1963,12 @@ section,
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border: 2px solid color-mix(in srgb, var(--accent-color), transparent 85%);
   transition: all 0.3s ease-in-out;
+}
+.how-we-work .step-icon:hover {
+  background-color: var(--accent-color);
+}
+.how-we-work .step-icon:hover i {
+  color: var(--background-color);
 }
 
 .how-we-work .step-icon i {
