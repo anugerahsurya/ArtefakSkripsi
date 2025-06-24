@@ -1344,6 +1344,12 @@ section,
   gap: 20px;
 }
 
+@media (max-width: 768px) {
+  .stats .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .span-2 {
   grid-column: span 2;
 }
