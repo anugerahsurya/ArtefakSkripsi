@@ -2598,7 +2598,38 @@ section,
 .team .team-carousel .swiper-slide {
   height: auto;
 }
+/* Ukuran ikon panah */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-size: 100% 100%;
+  filter: invert(100%);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5); /* default background bulat */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+/* Hover efek di ikon panah */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.8); /* lebih gelap saat hover */
+  transform: scale(1.1); /* sedikit membesar saat hover */
+}
+
+/* Adaptasi untuk dark mode */
+@media (prefers-color-scheme: dark) {
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    filter: invert(100%);
+  }
+
+  .carousel-control-prev:hover .carousel-control-prev-icon,
+  .carousel-control-next:hover .carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
