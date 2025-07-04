@@ -66,7 +66,7 @@
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="index.html" class="active">Pendahuluan</a></li>
-            <!-- <li><a href="metodologi.html">Metodologi</a></li> -->
+            <li><a href="metodologi.html">Metodologi</a></li>
             <li><a href="tujuan1.html">Sintesis Citra</a></li>
             <li><a href="#services">Perbandingan CGM</a></li>
             <li><a href="#team">Uji Efektivitas</a></li>
@@ -327,6 +327,16 @@
                   </div>
                 </div>
 
+                <!-- <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 94%"
+                      aria-valuenow="94"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div> -->
               </div>
             </div>
           </div>
@@ -334,86 +344,10 @@
       </section>
       <!-- /About Section -->
 
-<!-- Section : Solusi Generative Model -->
-<!-- Section : Solusi Generative Model -->
-<section id="stats" class="stats section light-background">
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row gy-4 align-items-start">
-
-      <!-- Kolom 1: Penjelasan solusi -->
-      <div class="col-lg-6 col-md-12" data-aos="fade-right" data-aos-delay="200">
-        <div class="stats-overview text-center text-lg-start">
-          <h3>
-            <span class="text-success">Solusi</span> untuk Permasalahan
-            Multiclass dan Imbalanced Dataset
-          </h3>
-          <p style="text-align: justify">
-  Permasalahan <strong>multiclass</strong> dan data <strong>tidak seimbang</strong> dapat menurunkan akurasi dan menyebabkan model <strong>bias</strong>. Salah satu solusinya adalah <strong>augmentasi data</strong> dengan <strong>model generatif</strong> seperti <strong>GAN</strong>, <strong>VAE</strong>, dan <strong>Diffusion</strong> untuk menambah sampel kelas minoritas.
-</p>
-<p style="text-align: justify">
-  Namun, dibutuhkan versi <strong>conditional</strong> seperti <strong>ACGAN</strong>, <strong>cVAE</strong>, dan <strong>Conditional Diffusion Model</strong> agar data sintetis lebih sesuai dengan <strong>label kelas</strong> dan augmentasi lebih <strong>efektif</strong>.
-</p>
-
-
-        </div>
-      </div>
-
-      <!-- Kolom 2: Tiga card generative model -->
-      <div class="col-lg-6 col-md-12" data-aos="fade-left" data-aos-delay="300">
-        <div class="d-flex flex-column gap-4">
-          
-          <!-- Card GAN -->
-          <div class="stats-card text-center">
-            <div class="stats-icon mb-3">
-              <img src="assets/img/gan.png" alt="GAN Icon" style="width: 40px; height: auto" />
-            </div>
-            <div class="stats-content">
-              <h5 class="fw-bold">GAN</h5>
-              <p class="text-muted" style="text-align: justify">
-                Menghasilkan gambar berkualitas tinggi namun cenderung tidak stabil saat pelatihan (Goodfellow et al., 2014).
-              </p>
-            </div>
-          </div>
-
-          <!-- Card VAE -->
-          <div class="stats-card text-center">
-            <div class="stats-icon mb-3">
-              <img src="assets/img/vae.png" alt="VAE Icon" style="width: 40px; height: auto" />
-            </div>
-            <div class="stats-content">
-              <h5 class="fw-bold">VAE</h5>
-              <p class="text-muted" style="text-align: justify">
-                Memahami representasi data dengan baik, tetapi kualitas gambar cenderung buram (Kingma & Welling, 2013).
-              </p>
-            </div>
-          </div>
-
-          <!-- Card Diffusion -->
-          <div class="stats-card text-center">
-            <div class="stats-icon mb-3">
-              <img src="assets/img/diffusion.png" alt="Diffusion Icon" style="width: 40px; height: auto" />
-            </div>
-            <div class="stats-content">
-              <h5 class="fw-bold">Diffusion</h5>
-              <p class="text-muted" style="text-align: justify">
-                Hasil sangat detail dan tajam, tetapi memerlukan komputasi tinggi (Ho et al., 2020).
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-      <!-- Section : CGM ACGAN-->
+      <!-- Section : Solusi Penelitian -->
       <section id="stats" class="stats section light-background">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4 align-items-center">
-            <!-- Kolom Teks -->
+          <div class="row gy-4">
             <div class="col-lg-6 col-md-12">
               <div
                 class="stats-overview text-center text-lg-start"
@@ -421,130 +355,191 @@
                 data-aos-delay="200"
               >
                 <h3>
-                  <span class="text-success">Auxiliary Classifier</span>
-                  Generative Adversarial Network
+                  <span class="text-success">Solusi</span> untuk Permasalahan
+                  Multiclass dan Imbalanced Dataset
                 </h3>
                 <p style="text-align: justify">
-                  Model ACGAN terdiri dari generator dan discriminator yang di
-                  mana generator ditambahkan dengan input berupa dimensi laten
-                  serta label pada citra. Selain itu pada discriminator juga
-                  ditambahkan input berupa label citra serta lapisan terakhir
-                  berupa auxiliary classifier yang bertujuan untuk
-                  mengklasifikasikan sebuah sampel yang diberikan berasal dari
-                  suatu class. Kondisi yang ada pada generator serta
-                  discriminator tersebut menjadi karakteristik dari model ACGAN
+                  Permasalahan multiclass dan data yang tidak seimbang dapat
+                  menurunkan akurasi dan membuat model bias terhadap kelas
+                  mayoritas. Solusi yang umum digunakan mencakup
+                  <strong>resampling</strong>, <strong>class weighting</strong>,
+                  serta <strong>augmentasi data</strong>. Pendekatan ini
+                  membantu model membentuk decision boundaries yang lebih adil
+                  untuk seluruh kelas.
                 </p>
               </div>
             </div>
 
-            <!-- Kolom Gambar -->
-            <div
-              class="col-lg-6 col-md-12 text-center"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              <img
-                src="assets/img/acgan_ars.png"
-                alt="Arsitektur ACGAN"
-                class="img-fluid"
-                style="max-width: 100%; height: auto"
-              />
+            <div class="col-lg-6 col-md-12">
+              <div class="stats-grid" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stats-card text-center">
+                  <div class="stats-icon mb-3">
+                    <i
+                      class="bi bi-bar-chart-line"
+                      style="color: rgb(169, 169, 169)"
+                    ></i>
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">Resampling</h5>
+                    <p class="text-muted" style="text-align: justify">
+                      Memiliki risiko karena persentase resampling yang salah
+                      menyebabkan tidak adanya perubahan hingga penurunan
+                      performa.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="stats-card text-center">
+                  <div class="stats-icon mb-3">
+                    <i
+                      class="fas fa-sliders-h"
+                      style="color: rgb(169, 169, 169)"
+                    ></i>
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">Class Weighting</h5>
+                    <p class="text-muted" style="text-align: justify">
+                      Efektivitas bergantung pada metode dan dataset sehingga
+                      tidak konsisten untuk seluruh kasus.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="stats-card text-center span-2">
+                  <div class="stats-icon mb-3">
+                    <i class="bi bi-arrow-repeat" style="color: #198754"></i>
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">
+                      <span class="text-success">Augmentasi Data</span>
+                    </h5>
+                    <p class="text-muted" style="text-align: justify">
+                      Augmentasi data terdiri dari dua pendekatan utama:
+                      <strong
+                        ><span class="text-danger"
+                          >Transformasi Geometri</span
+                        ></strong
+                      >, yang berisiko mengubah ciri penting jika tidak
+                      digunakan hati-hati, dan
+                      <strong
+                        ><span class="text-success"
+                          >Model Generatif</span
+                        ></strong
+                      >, yang unggul karena mampu menghasilkan variasi data
+                      kompleks secara otomatis.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
       <!-- /Stats Section -->
 
-      <!-- Section : CGM CVAE-->
+      <!-- Section : Solusi Generative Model -->
       <section id="stats" class="stats section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
           <div class="row gy-4 align-items-center">
-            <!-- Kolom Teks -->
-            <div class="col-lg-6 col-md-12">
-              <div
-                class="stats-overview text-center text-lg-start"
-                data-aos="fade-right"
-                data-aos-delay="200"
-              >
-                <h3>
-                  <span class="text-success">Conditional</span>
-                  Variational Autoencoder
-                </h3>
-                <p style="text-align: justify">
-                  Model selanjutnya yaitu cVAE terdiri dari encoder dan decoder
-                  di mana pada encoder serta decoder ditambahkan input berupa
-                  label pada citra sehingga citra yang dihasilkan akan memiliki
-                  karakteristik dari label yang didefinisikan. Hal tersebut
-                  membuat model dapat menghasilkan citra berdasarkan suatu
-                  kontrol berupa label pada citra.
+            <!-- Gambar di kiri, sedikit ke tengah -->
+            <div
+              class="col-lg-6 col-md-12 d-flex justify-content-center"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            >
+              <div class="d-flex flex-column align-items-center">
+                <img
+                  src="assets/img/trilemma.png"
+                  alt="Trilemma Illustration"
+                  class="img-fluid mb-3"
+                  style="max-width: 70%; height: auto; border-radius: 12px"
+                />
+                <p class="fw-semibold text-center text-muted mt-2">
+                  Trilemma Generative Learning
                 </p>
               </div>
             </div>
 
-            <!-- Kolom Gambar -->
-            <div
-              class="col-lg-6 col-md-12 text-center"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              <img
-                src="assets/img/cvae_ars.png"
-                alt="Arsitektur CVAE"
-                class="img-fluid"
-                style="max-width: 100%; height: auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /Stats Section -->
-
-      <!-- Section : CGM CDDPM-->
-      <section id="stats" class="stats section light-background">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4 align-items-center">
-            <!-- Kolom Teks -->
+            <!-- Tiga card ditumpuk secara vertikal -->
             <div class="col-lg-6 col-md-12">
               <div
-                class="stats-overview text-center text-lg-start"
-                data-aos="fade-right"
-                data-aos-delay="200"
+                class="d-flex flex-column gap-4"
+                data-aos="zoom-in"
+                data-aos-delay="300"
               >
-                <h3>
-                  <span class="text-success">Conditional</span>
-                  Denoising Diffusion Probabilistic Model
-                </h3>
-                <p style="text-align: justify">
-                  Model terakhir adalah CDDPM yang merupakan model conditional
-                  dari model diffusion yang akan mengadaptasi mekanisme dari
-                  Denoising Diffusion Probabilistic Model (DDPM) di mana
-                  terdapat proses pemberian dan penghilangan noise bertahap pada
-                  citra. Model ini memiliki dua tahap utama yaitu proses forward
-                  dan proses reverse. Jumlah tahapan forward dan reverse yang
-                  dilakukan akan bergantung pada parameter steps yang
-                  didefinisikan.
-                </p>
-              </div>
-            </div>
+                <!-- Card 1 -->
+                <div class="stats-card text-center">
+                  <div class="stats-icon mb-3">
+                    <img
+                      src="assets/img/gan.png"
+                      alt="GAN Icon"
+                      style="width: 40px; height: auto"
+                    />
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">
+                      Generative Adversarial Network (GAN)
+                    </h5>
+                    <p class="text-muted" style="text-align: justify">
+                      GAN memiliki keunggulan dalam menghasilkan gambar
+                      berkualitas tinggi dengan detail yang baik (I. J.
+                      Goodfellow et al., 2014b) tetapi pembelajarannya cenderung
+                      tidak stabil, sulit mencapai kondisi model yang konvergen,
+                      dan rentan terkena mode collapse (Arjovsky & Bottou, 2017;
+                      Mescheder et al., 2018).
+                    </p>
+                  </div>
+                </div>
 
-            <!-- Kolom Gambar -->
-            <div
-              class="col-lg-6 col-md-12 text-center"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              <img
-                src="assets/img/cddpm_ars.png"
-                alt="Arsitektur ACGAN"
-                class="img-fluid"
-                style="max-width: 70%; height: auto"
-              />
+                <!-- Card 2 -->
+                <div class="stats-card text-center">
+                  <div class="stats-icon mb-3">
+                    <img
+                      src="assets/img/vae.png"
+                      alt="GAN Icon"
+                      style="width: 40px; height: auto"
+                    />
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">Variational Autoencoder</h5>
+                    <p class="text-muted" style="text-align: justify">
+                      VAE unggul dalam mempelajari representasi yang bermakna
+                      dari data (Kingma & Welling, 2013) namun memiliki
+                      keterbatasan, dimana gambar yang dihasilkan cenderung
+                      buram sehingga tidak menangkap detail dengan jelas (Razavi
+                      et al., 2019).
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="stats-card text-center">
+                  <div class="stats-icon mb-3">
+                    <img
+                      src="assets/img/diffusion.png"
+                      alt="GAN Icon"
+                      style="width: 40px; height: auto"
+                    />
+                  </div>
+                  <div class="stats-content">
+                    <h5 class="fw-bold">Diffusion Model</h5>
+                    <p class="text-muted" style="text-align: justify">
+                      Diffusion Model dapat menghasilkan gambar dengan kualitas
+                      tinggi dan tajam serta detail yang baik dibanding model
+                      lainnya (Ho et al., 2020), namun membutuhkan sumber daya
+                      komputasi yang bagus serta hasilnya lebih sulit
+                      diinterpretasikan (Nichol & Dhariwal, 2021; Song et al.,
+                      2020a).
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Tujuan Penelitian -->
+      <!-- How We Work Section -->
       <section id="how-we-work" class="how-we-work section">
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
