@@ -70,9 +70,9 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="index.html">Pendahuluan</a></li>
+            <li><a href="index.html" class="active">Pendahuluan</a></li>
             <!-- <li><a href="metodologi.html">Metodologi</a></li> -->
-            <li><a href="tujuan1.html" class="active">Sintesis Citra</a></li>
+            <li><a href="tujuan1.html">Sintesis Citra</a></li>
             <li><a href="#services">Perbandingan CGM</a></li>
             <li><a href="#team">Uji Efektivitas</a></li>
             <!-- <li class="dropdown">
@@ -532,7 +532,281 @@
       </section>
       <!-- /Stats Section -->
     </main>
+    <section id="stats" class="stats section light-background">
+      <div class="text-center my-4">
+        <button id="showFormBtn" class="btn btn-outline-primary btn-lg">
+          Coba Conditional Generative Model
+        </button>
+      </div>
 
+      <div class="container py-5 d-none" id="cgmFormContainer">
+        <h2 class="text-center mb-4">Inference Conditional Generative Model</h2>
+
+        <!-- Form Controls -->
+        <form id="generateForm" class="p-4 border rounded shadow-sm bg-white">
+          <div class="row g-4">
+            <!-- Kolom 1: Model + Jumlah Citra -->
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="modelSelect" class="form-label fw-semibold"
+                  >Pilih Model</label
+                >
+                <select class="form-select" id="modelSelect" required>
+                  <option value="" disabled selected>-- Pilih Model --</option>
+                  <option value="acgan">ACGAN</option>
+                  <option value="cvae">cVAE</option>
+                  <option value="cddpm">CDDPM</option>
+                </select>
+              </div>
+              <div>
+                <label for="imageCount" class="form-label fw-semibold"
+                  >Jumlah Citra</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="imageCount"
+                  min="1"
+                  max="100"
+                  value="8"
+                  required
+                />
+                <div class="form-text">Maksimum 100 gambar.</div>
+              </div>
+            </div>
+
+            <!-- Kolom 2: Pilih Kelas -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Pilih Kelas</label>
+              <div class="row row-cols-1 row-cols-md-2 g-2">
+                <!-- Class 0 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="0"
+                      id="class0"
+                      data-label="Actinic Keratosis"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class0"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="0"
+                      ></i>
+                      <span>Actinic Keratosis</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 1 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="1"
+                      id="class1"
+                      data-label="Basal Cell Carcinoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class1"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="1"
+                      ></i>
+                      <span>Basal Cell Carcinoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 2 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="2"
+                      id="class2"
+                      data-label="Benign Keratosis"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class2"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="2"
+                      ></i>
+                      <span>Benign Keratosis</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 3 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="3"
+                      id="class3"
+                      data-label="Dermatofibroma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class3"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="3"
+                      ></i>
+                      <span>Dermatofibroma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 4 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="4"
+                      id="class4"
+                      data-label="Melanocytic Nevi"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class4"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="4"
+                      ></i>
+                      <span>Melanocytic Nevi</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 5 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="5"
+                      id="class5"
+                      data-label="Melanoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class5"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="5"
+                      ></i>
+                      <span>Melanoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 6 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="6"
+                      id="class6"
+                      data-label="Squamous Cell Carcinoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class6"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="6"
+                      ></i>
+                      <span>Squamous Cell Carcinoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 7 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="7"
+                      id="class7"
+                      data-label="Vascular Skin Lesion"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class7"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="7"
+                      ></i>
+                      <span>Vascular Skin Lesion</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-4 me-2">
+              Generate
+            </button>
+            <button
+              type="button"
+              class="btn btn-success px-4 me-2"
+              id="downloadBtn"
+              disabled
+            >
+              Download ZIP
+            </button>
+            <button type="reset" class="btn btn-secondary px-4" id="resetBtn">
+              Reset
+            </button>
+          </div>
+        </form>
+
+        <!-- Preview Section -->
+        <div id="previewContainer" class="row gy-4 mt-5">
+          <!-- Hasil preview akan muncul di sini -->
+        </div>
+      </div>
+    </section>
     <footer id="footer" class="footer position-relative light-background">
       <div class="container text-center py-5">
         <!-- Nama Aplikasi -->
