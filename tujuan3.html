@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Perbandingan Conditional Generative Model</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="assets/img/logostis.png" rel="icon" />
+    <link href="assets/img/logostis.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- =======================================================
+  * Template Name: Scout
+  * Template URL: https://bootstrapmade.com/scout-bootstrap-multipurpose-template/
+  * Updated: May 05 2025 with Bootstrap v5.3.5
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a
+          href="index.html"
+          class="logo d-flex align-items-center me-auto text-decoration-none"
+        >
+          <img src="assets/img/logostis.png" alt="Logo" style="height: 40px" />
+          <div class="ms-2">
+            <h6 class="sitename mb-0"><b>Politeknik Statistika STIS</b></h6>
+            <small class="text-muted">Anugerah Surya Atmaja</small>
+          </div>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Pendahuluan</a></li>
+            <!-- <li><a href="metodologi.html">Metodologi</a></li> -->
+            <li><a href="tujuan1.html">Sintesis Citra</a></li>
+            <li><a href="tujuan2.html">Perbandingan CGM</a></li>
+            <li><a href="tujuan3.html" class="active">Uji Efektivitas</a></li>
+            <!-- <li class="dropdown">
+              <a href="#"
+                ><span>Dropdown</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="#">Dropdown 1</a></li>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Deep Dropdown</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i
+                  ></a>
+                  <ul>
+                    <li><a href="#">Deep Dropdown 1</a></li>
+                    <li><a href="#">Deep Dropdown 2</a></li>
+                    <li><a href="#">Deep Dropdown 3</a></li>
+                    <li><a href="#">Deep Dropdown 4</a></li>
+                    <li><a href="#">Deep Dropdown 5</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Dropdown 2</a></li>
+                <li><a href="#">Dropdown 3</a></li>
+                <li><a href="#">Dropdown 4</a></li>
+              </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li> -->
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <!-- <a class="btn-getstarted" href="index.html#about">Get Started</a> -->
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Section : Menurut Model Klasifikasi-->
+      <!-- Stats Section -->
+      <section id="stats" class="stats section" style="padding-bottom: 1em">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <!-- Baris 1: Per Model Klasifikasi -->
+          <div class="row gy-4 align-items-center mb-5">
+            <!-- Kolom Teks -->
+            <div class="col-lg-6 col-md-12">
+              <div
+                class="stats-overview text-center text-lg-start"
+                data-aos="fade-right"
+                data-aos-delay="200"
+              >
+                <h3>
+                  Perbandingan Performa Klasifikasi Berdasarkan
+                  <span class="text-success">Model Klasifikasi</span>
+                </h3>
+                <p style="text-align: justify">
+                  Model YOLO menunjukkan performa klasifikasi yang lebih
+                  konsisten dibanding EfficientNetV2M, dengan plot mendekati
+                  sisi kanan atas yang mencerminkan keseimbangan precision dan
+                  recall. Hal ini menunjukkan kemampuannya dalam mengoptimalkan
+                  hasil klasifikasi, termasuk pada dataset yang tidak seimbang.
+                </p>
+              </div>
+            </div>
+
+            <!-- Kolom Gambar -->
+            <div
+              class="col-lg-6 col-md-12 text-center"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <div class="single-image">
+                <img
+                  src="assets/img/tujuan3/Model - Scatter Plot.png"
+                  class="d-block w-100 img-fluid"
+                  alt="Model Klasifikasi"
+                />
+                <div class="mt-2">
+                  <strong>
+                    Sebaran performa klasifikasi menurut model klasifikasi yang
+                    digunakan
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Baris 2: Per Skenario Augmentasi -->
+          <div class="row gy-4 align-items-center">
+            <!-- Kolom Teks -->
+            <div class="col-lg-6 col-md-12">
+              <div
+                class="stats-overview text-center text-lg-start"
+                data-aos="fade-right"
+                data-aos-delay="200"
+              >
+                <h3>
+                  Perbandingan Performa Klasifikasi Berdasarkan
+                  <span class="text-success">Skenario Augmentasi</span>
+                </h3>
+                <p style="text-align: justify">
+                  Evaluasi berdasarkan skenario augmentasi menunjukkan bahwa 3N
+                  Full menghasilkan performa terburuk, dengan precision dan
+                  recall rendah. Hal ini kemungkinan disebabkan oleh data
+                  sintetis yang kurang representatif pada semua class. Selain
+                  itu, terdapat beberapa class memiliki kemiripan visual yang
+                  tinggi, sehingga sulit dibedakan oleh model. Sebaliknya,
+                  skenario N Minoritas memberikan hasil lebih baik dan konsisten
+                  karena fokus pada penambahan citra pada class minoritas.
+                  Skenario 2N Minoritas juga efektif, tetapi performanya menurun
+                  pada 3N akibat potensi overfitting terhadap data sintetis.
+                </p>
+              </div>
+            </div>
+
+            <!-- Kolom Gambar -->
+            <div
+              class="col-lg-6 col-md-12 text-center"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <div class="single-image">
+                <img
+                  src="assets/img/tujuan3/Skenario - Scatter Plot.png"
+                  class="d-block w-100 img-fluid"
+                  alt="Skenario Augmentasi"
+                />
+                <div class="mt-2">
+                  <strong>
+                    Sebaran performa klasifikasi menurut skenario augmentasi
+                    yang digunakan
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Baris 3: Per Metode Augmentasi -->
+          <div class="row gy-4 align-items-center">
+            <!-- Kolom Teks -->
+            <div class="col-lg-6 col-md-12">
+              <div
+                class="stats-overview text-center text-lg-start"
+                data-aos="fade-right"
+                data-aos-delay="200"
+              >
+                <h3>
+                  Perbandingan Performa Klasifikasi Berdasarkan
+                  <span class="text-success">Metode Augmentasi</span>
+                </h3>
+                <p style="text-align: justify">
+                  Performa klasifikasi juga dievaluasi berdasarkan metode
+                  augmentasi yang digunakan. Gambar 29 menunjukkan bahwa cVAE
+                  menghasilkan sebaran precision dan recall yang acak, sedangkan
+                  ACGAN cenderung memiliki recall baik namun dengan variasi
+                  precision yang besar. Meskipun belum konsisten, ACGAN relatif
+                  seimbang dalam precision dan recall. Sementara itu, CDDPM
+                  menunjukkan performa terbaik dengan sebagian besar titik
+                  berada di area kanan atas grafik, menandakan bahwa augmentasi
+                  menggunakan CDDPM secara umum meningkatkan performa
+                  klasifikasi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Kolom Gambar -->
+            <div
+              class="col-lg-6 col-md-12 text-center"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <div class="single-image">
+                <img
+                  src="assets/img/tujuan3/Augmentasi - Scatter Plot.png"
+                  class="d-block w-100 img-fluid"
+                  alt="Metode Augmentasi"
+                />
+                <div class="mt-2">
+                  <strong>
+                    Sebaran performa klasifikasi menurut metode augmentasi yang
+                    digunakan
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="stats" class="stats section" style="padding-top: 0">
+        <div
+          class="container pt-3 pb-4"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="row justify-content-center align-items-start">
+            <!-- Form Input -->
+            <div class="col-lg-6">
+              <!-- Tips -->
+              <div class="card shadow-sm rounded-4">
+                <div class="card-body">
+                  <h4 class="card-title text-success">
+                    <strong>Tips Pengambilan Gambar</strong>
+                  </h4>
+
+                  <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-bullseye"></i></div>
+                    <span>Pastikan objek berada di tengah.</span>
+                  </div>
+
+                  <div class="tip-item">
+                    <div class="tip-icon">
+                      <i class="fas fa-hand-point-up"></i>
+                    </div>
+                    <span>Objek harus merupakan bagian dari kulit.</span>
+                  </div>
+
+                  <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+                    <span>Ambil gambar di tempat yang terang.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card shadow rounded-4 mt-4">
+                <div class="card-body">
+                  <h4 class="card-title mb-4 text-success">
+                    <strong>Klasifikasi Lesi Kulit</strong>
+                  </h4>
+
+                  <form id="imageForm">
+                    <div class="mb-3">
+                      <label for="imageUpload" class="form-label"
+                        >Upload Gambar</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="imageUpload"
+                        accept="image/*"
+                      />
+                    </div>
+
+                    <div class="mb-3 text-center">
+                      <label class="form-label d-block"
+                        >Atau gunakan Kamera</label
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        onclick="openCamera()"
+                      >
+                        Buka Kamera
+                      </button>
+                    </div>
+
+                    <div class="mb-3 d-none" id="cameraSection">
+                      <video
+                        id="cameraPreview"
+                        autoplay
+                        class="w-100 rounded-3 border"
+                      ></video>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-success mt-2"
+                        onclick="captureImage()"
+                      >
+                        Ambil Gambar
+                      </button>
+                    </div>
+
+                    <div class="text-end mt-4">
+                      <button type="submit" class="btn btn-primary">
+                        Klasifikasikan
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hasil Klasifikasi -->
+            <div class="col-lg-6 mt-4 mt-lg-0">
+              <div class="card shadow rounded-4">
+                <div class="card-body text-center">
+                  <h5 class="card-title mb-3">Hasil Klasifikasi</h5>
+                  <img
+                    id="previewImage"
+                    src="#"
+                    alt="Preview"
+                    class="img-fluid rounded mb-3 d-none"
+                  />
+                  <div
+                    id="classificationResult"
+                    class="alert alert-info d-none"
+                  >
+                    <strong>Hasil:</strong> <span id="resultText">...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /Stats Section -->
+
+      <!-- /Stats Section -->
+    </main>
+
+    <footer id="footer" class="footer position-relative light-background">
+      <div class="container text-center py-5">
+        <!-- Nama Aplikasi -->
+        <h3 class="sitename mb-3">Anugerah Surya Atmaja</h3>
+
+        <!-- Logo Sosial Media -->
+        <div class="social-links d-flex justify-content-center mb-4">
+          <a
+            href="https://www.linkedin.com/in/anugerah-surya-atmaja-a0259636b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            class="mx-2"
+            ><i class="bi bi-linkedin fs-4"></i
+          ></a>
+          <a href="https://github.com/anugerahsurya" class="mx-2"
+            ><i class="bi bi-github fs-4"></i
+          ></a>
+          <a href="https://instagram.com/anugerahhsurya" class="mx-2"
+            ><i class="bi bi-instagram fs-4"></i
+          ></a>
+        </div>
+
+        <!-- Keterangan Hak Cipta -->
+        <div class="copyright">
+          <p>© <strong>Artefak Skripsi</strong>. All Rights Reserved</p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+      const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+      tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
+    </script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

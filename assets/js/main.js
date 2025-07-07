@@ -378,3 +378,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Kelengkapan JS untuk Klasifikasi Citra tujuan3.html
+
+const imageInput = document.getElementById("imageUpload");
+const previewImage = document.getElementById("previewImage");
+const resultContainer = document.getElementById("classificationResult");
+const resultText = document.getElementById("resultText");
+
+imageInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImage.src = e.target.result;
+      previewImage.classList.remove("d-none");
+      resultContainer.classList.remove("d-none");
+      resultText.textContent = "Model belum dijalankan (dummy output)";
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+function openCamera() {
+  const video = document.getElementById("cameraPreview");
+  const cameraSection = document.getElementById("cameraSection");
+  cameraSection.classList.remove("d-none");
+  navigator.mediaDevices
+    .getUserMedia({ video: true })
+    .then((stream) => {
+      video.srcObject = stream;
+    })
+    .catch((err) => {
+      alert("Tidak dapat mengakses kamera");
+    });
+}
+
+function captureImage() {
+  const video = document.getElementById("cameraPreview");
+  const canvas = document.createElement("canvas");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const dataURL = canvas.toDataURL("image/png");
+
+  previewImage.src = dataURL;
+  previewImage.classList.remove("d-none");
+  resultContainer.classList.remove("d-none");
+  resultText.textContent = "Model belum dijalankan (dummy output)";
+}
+
+document.getElementById("imageForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  resultText.textContent = "Melanoma (Contoh)";
+});
