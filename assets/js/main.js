@@ -385,6 +385,11 @@ const imageInput = document.getElementById("imageUpload");
 const previewImage = document.getElementById("previewImage");
 const resultContainer = document.getElementById("classificationResult");
 const resultText = document.getElementById("resultText");
+const classifyBtn = document.getElementById("classifyBtn");
+const switchCameraBtn = document.getElementById("switchCameraBtn");
+
+let currentFacingMode = "environment";
+let stream;
 
 imageInput.addEventListener("change", function () {
   const file = this.files[0];
@@ -393,8 +398,8 @@ imageInput.addEventListener("change", function () {
     reader.onload = function (e) {
       previewImage.src = e.target.result;
       previewImage.classList.remove("d-none");
-      resultContainer.classList.remove("d-none");
-      resultText.textContent = "Model belum dijalankan (dummy output)";
+      classifyBtn.classList.remove("d-none");
+      resultContainer.classList.add("d-none");
     };
     reader.readAsDataURL(file);
   }
@@ -404,14 +409,30 @@ function openCamera() {
   const video = document.getElementById("cameraPreview");
   const cameraSection = document.getElementById("cameraSection");
   cameraSection.classList.remove("d-none");
+
+  if (stream) {
+    stream.getTracks().forEach((track) => track.stop());
+  }
+
   navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then((stream) => {
+    .getUserMedia({
+      video: { facingMode: currentFacingMode },
+      audio: false,
+    })
+    .then((newStream) => {
+      stream = newStream;
       video.srcObject = stream;
     })
     .catch((err) => {
-      alert("Tidak dapat mengakses kamera");
+      console.error(err);
+      alert("Tidak dapat mengakses kamera.");
     });
+}
+
+function switchCamera() {
+  currentFacingMode =
+    currentFacingMode === "environment" ? "user" : "environment";
+  openCamera();
 }
 
 function captureImage() {
@@ -425,11 +446,19 @@ function captureImage() {
 
   previewImage.src = dataURL;
   previewImage.classList.remove("d-none");
-  resultContainer.classList.remove("d-none");
-  resultText.textContent = "Model belum dijalankan (dummy output)";
+  classifyBtn.classList.remove("d-none");
+  resultContainer.classList.add("d-none");
 }
 
-document.getElementById("imageForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+classifyBtn.addEventListener("click", function () {
   resultText.textContent = "Melanoma (Contoh)";
+  resultContainer.classList.remove("d-none");
+});
+
+// Sembunyikan tombol switch kamera jika bukan perangkat mobile
+window.addEventListener("DOMContentLoaded", () => {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isMobile) {
+    switchCameraBtn.style.display = "none";
+  }
 });

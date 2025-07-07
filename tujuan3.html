@@ -261,20 +261,16 @@
         </div>
       </section>
       <section id="stats" class="stats section" style="padding-top: 0">
-        <div
-          class="container pt-3 pb-4"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
+        <div class="container pt-3 pb-4">
           <div class="row justify-content-center align-items-start">
-            <!-- Form Input -->
+            <!-- Kiri: Tips + Form -->
             <div class="col-lg-6">
               <!-- Tips -->
-              <div class="card shadow-sm rounded-4">
+              <div class="card shadow-sm rounded-4 mb-4">
                 <div class="card-body">
-                  <h4 class="card-title text-success">
-                    <strong>Tips Pengambilan Gambar</strong>
-                  </h4>
+                  <h5 class="card-title text-warning">
+                    Tips Pengambilan Gambar
+                  </h5>
 
                   <div class="tip-item">
                     <div class="tip-icon"><i class="fas fa-bullseye"></i></div>
@@ -294,10 +290,12 @@
                   </div>
                 </div>
               </div>
-              <div class="card shadow rounded-4 mt-4">
+
+              <!-- Form Upload -->
+              <div class="card shadow rounded-4">
                 <div class="card-body">
-                  <h4 class="card-title mb-4 text-success">
-                    <strong>Klasifikasi Lesi Kulit</strong>
+                  <h4 class="card-title mb-4 text-primary">
+                    Klasifikasi Lesi Kulit
                   </h4>
 
                   <form id="imageForm">
@@ -319,10 +317,18 @@
                       >
                       <button
                         type="button"
-                        class="btn btn-outline-secondary"
+                        class="btn btn-outline-secondary me-2"
                         onclick="openCamera()"
                       >
                         Buka Kamera
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-info"
+                        id="switchCameraBtn"
+                        onclick="switchCamera()"
+                      >
+                        Ganti Kamera
                       </button>
                     </div>
 
@@ -330,7 +336,7 @@
                       <video
                         id="cameraPreview"
                         autoplay
-                        class="w-100 rounded-3 border"
+                        class="w-100 border"
                       ></video>
                       <button
                         type="button"
@@ -340,18 +346,12 @@
                         Ambil Gambar
                       </button>
                     </div>
-
-                    <div class="text-end mt-4">
-                      <button type="submit" class="btn btn-primary">
-                        Klasifikasikan
-                      </button>
-                    </div>
                   </form>
                 </div>
               </div>
             </div>
 
-            <!-- Hasil Klasifikasi -->
+            <!-- Kanan: Hasil -->
             <div class="col-lg-6 mt-4 mt-lg-0">
               <div class="card shadow rounded-4">
                 <div class="card-body text-center">
@@ -362,6 +362,9 @@
                     alt="Preview"
                     class="img-fluid rounded mb-3 d-none"
                   />
+                  <button id="classifyBtn" class="btn btn-primary d-none mb-3">
+                    Klasifikasikan
+                  </button>
                   <div
                     id="classificationResult"
                     class="alert alert-info d-none"
