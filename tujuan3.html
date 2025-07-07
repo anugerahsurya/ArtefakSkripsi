@@ -333,11 +333,39 @@
                     </div>
 
                     <div class="mb-3 d-none" id="cameraSection">
-                      <video
-                        id="cameraPreview"
-                        autoplay
-                        class="w-100 border"
-                      ></video>
+                      <div class="position-relative w-100">
+                        <!-- Video Preview -->
+                        <video
+                          id="cameraPreview"
+                          autoplay
+                          class="w-100 rounded border"
+                        ></video>
+
+                        <!-- Hint di atas bounding box -->
+                        <div
+                          class="position-absolute top-0 start-50 translate-middle-x text-danger text-center fw-semibold"
+                          style="z-index: 10; padding-top: 2rem"
+                        >
+                          <small
+                            >Pastikan objek berada di dalam kotak ini</small
+                          >
+                        </div>
+
+                        <!-- Bounding Box Fokus -->
+                        <div
+                          id="boundingBox"
+                          class="position-absolute top-50 start-50 translate-middle border border-danger"
+                          style="
+                            width: 50%;
+                            height: 50%;
+                            pointer-events: none;
+                            border-width: 2em;
+                            border-style: dashed;
+                            border-radius: 0.5rem;
+                          "
+                        ></div>
+                      </div>
+
                       <button
                         type="button"
                         class="btn btn-sm btn-success mt-2"
