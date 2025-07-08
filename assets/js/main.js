@@ -381,84 +381,123 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Kelengkapan JS untuk Klasifikasi Citra tujuan3.html
 
-const imageInput = document.getElementById("imageUpload");
-const previewImage = document.getElementById("previewImage");
-const resultContainer = document.getElementById("classificationResult");
-const resultText = document.getElementById("resultText");
-const classifyBtn = document.getElementById("classifyBtn");
-const switchCameraBtn = document.getElementById("switchCameraBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const imageInput = document.getElementById("imageUpload");
+  const previewImage = document.getElementById("previewImage");
+  const resultContainer = document.getElementById("classificationResult");
+  const resultText = document.getElementById("resultText");
+  const classifyBtn = document.getElementById("classifyBtn");
+  const switchCameraBtn = document.getElementById("switchCameraBtn");
 
-let currentFacingMode = "environment";
-let stream;
+  let currentFacingMode = "environment";
+  let stream;
 
-imageInput.addEventListener("change", function () {
-  const file = this.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      previewImage.src = e.target.result;
-      previewImage.classList.remove("d-none");
-      classifyBtn.classList.remove("d-none");
-      resultContainer.classList.add("d-none");
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-function openCamera() {
-  const video = document.getElementById("cameraPreview");
-  const cameraSection = document.getElementById("cameraSection");
-  cameraSection.classList.remove("d-none");
-
-  if (stream) {
-    stream.getTracks().forEach((track) => track.stop());
-  }
-
-  navigator.mediaDevices
-    .getUserMedia({
-      video: { facingMode: currentFacingMode },
-      audio: false,
-    })
-    .then((newStream) => {
-      stream = newStream;
-      video.srcObject = stream;
-    })
-    .catch((err) => {
-      console.error(err);
-      alert("Tidak dapat mengakses kamera.");
+  if (imageInput) {
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImage.src = e.target.result;
+          previewImage.classList.remove("d-none");
+          classifyBtn.classList.remove("d-none");
+          resultContainer.classList.add("d-none");
+        };
+        reader.readAsDataURL(file);
+      }
     });
-}
+  }
 
-function switchCamera() {
-  currentFacingMode =
-    currentFacingMode === "environment" ? "user" : "environment";
-  openCamera();
-}
+  window.openCamera = function () {
+    const video = document.getElementById("cameraPreview");
+    const cameraSection = document.getElementById("cameraSection");
+    cameraSection.classList.remove("d-none");
 
-function captureImage() {
-  const video = document.getElementById("cameraPreview");
-  const canvas = document.createElement("canvas");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  const dataURL = canvas.toDataURL("image/png");
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
 
-  previewImage.src = dataURL;
-  previewImage.classList.remove("d-none");
-  classifyBtn.classList.remove("d-none");
-  resultContainer.classList.add("d-none");
-}
+    navigator.mediaDevices
+      .getUserMedia({
+        video: { facingMode: currentFacingMode },
+        audio: false,
+      })
+      .then((newStream) => {
+        stream = newStream;
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Tidak dapat mengakses kamera.");
+      });
+  };
 
-classifyBtn.addEventListener("click", function () {
-  resultText.textContent = "Melanoma (Contoh)";
-  resultContainer.classList.remove("d-none");
-});
+  window.switchCamera = function () {
+    currentFacingMode =
+      currentFacingMode === "environment" ? "user" : "environment";
+    window.openCamera();
+  };
 
-// Sembunyikan tombol switch kamera jika bukan perangkat mobile
-window.addEventListener("DOMContentLoaded", () => {
+  window.captureImage = function () {
+    const video = document.getElementById("cameraPreview");
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL("image/png");
+
+    previewImage.src = dataURL;
+    previewImage.classList.remove("d-none");
+    classifyBtn.classList.remove("d-none");
+    resultContainer.classList.add("d-none");
+  };
+
+  if (classifyBtn) {
+    classifyBtn.addEventListener("click", async function () {
+      resultText.textContent = "⏳ Memproses...";
+      resultContainer.classList.remove("d-none");
+
+      const fileInput = imageInput.files[0];
+      let file;
+
+      if (fileInput) {
+        file = fileInput;
+      } else {
+        const dataURL = previewImage.src;
+        const blob = await (await fetch(dataURL)).blob();
+        file = new File([blob], "capture.png", { type: "image/png" });
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const res = await fetch("/predict", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          resultText.textContent = `❌ Error: ${data.error}`;
+          resultContainer.classList.replace("alert-info", "alert-danger");
+        } else {
+          resultText.textContent = `✅ ${data.label} (${(
+            data.confidence * 100
+          ).toFixed(2)}%)`;
+          resultContainer.classList.replace("alert-danger", "alert-info");
+        }
+      } catch (err) {
+        resultText.textContent = "❌ Gagal terhubung ke server.";
+        resultContainer.classList.replace("alert-info", "alert-danger");
+      }
+    });
+  }
+
+  // Sembunyikan tombol switch kamera di desktop
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  if (!isMobile) {
+  if (!isMobile && switchCameraBtn) {
     switchCameraBtn.style.display = "none";
   }
 });
