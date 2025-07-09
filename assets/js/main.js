@@ -434,18 +434,26 @@ document.addEventListener("DOMContentLoaded", function () {
           return chunks;
         }, [])
         .map((group, idx) => {
+          const imageElements = group
+            .map((url, i) => {
+              console.log(`📷 [${idx}-${i}] URL gambar:`, url);
+
+              // Cek validitas URL
+              if (!url || typeof url !== "string" || !url.startsWith("http")) {
+                return `<div class="text-danger">Invalid URL</div>`;
+              }
+
+              return `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
+            })
+            .join("");
+
           return `
-            <div class="carousel-item ${idx === 0 ? "active" : ""}">
-              <div class="d-flex flex-wrap justify-content-center gap-2">
-                ${group
-                  .map(
-                    (url) =>
-                      `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`
-                  )
-                  .join("")}
-              </div>
-            </div>
-          `;
+      <div class="carousel-item ${idx === 0 ? "active" : ""}">
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          ${imageElements}
+        </div>
+      </div>
+    `;
         })
         .join("");
 
