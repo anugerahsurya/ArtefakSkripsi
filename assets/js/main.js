@@ -5,6 +5,11 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8000"
+    : "https://abc123.ngrok-free.app"; // ← Ganti sesuai ngrok
 
 (function () {
   "use strict";
@@ -324,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
     previewContainer.appendChild(loadingSpinner);
     downloadBtn.disabled = true;
 
-    fetch("http://localhost:8000/generate", {
+    fetch(`${API_BASE}/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -350,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   downloadBtn.addEventListener("click", function () {
-    fetch("http://localhost:8000/download")
+    fetch(`${API_BASE}/download`)
       .then((res) => {
         if (!res.ok) throw new Error("Gagal download ZIP");
         return res.blob();
@@ -556,7 +561,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("file", file);
 
       try {
-        const res = await fetch("/predict", {
+        const res = await fetch(`${API_BASE}/predict`, {
           method: "POST",
           body: formData,
         });

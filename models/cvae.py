@@ -4,6 +4,7 @@ from PIL import Image
 import tensorflow as tf
 from tensorflow.keras import layers
 from io import BytesIO
+import uuid
 
 # =============================
 # 1. Parameter Model
@@ -61,43 +62,37 @@ cvae.load_weights(weights_path)
 # =============================
 # 4. Fungsi Generate Gambar
 # =============================
-def generate_cvae(class_id: int, save_path: str = None) -> BytesIO:
+def generate_cvae(class_id: int, output_dir: str, count: int):
     """
-    Generate satu gambar berdasarkan class_id dan kembalikan dalam bentuk BytesIO (PNG).
-    Jika save_path diberikan, gambar juga disimpan sebagai file.
-    """
-    num_images = 1
+    Generate multiple images using CVAE for a specific class and save them.
 
-    # One-hot label
-    label_vector = np.zeros((num_images, num_classes))
+    Args:
+        class_id (int): Index of the class (0 to num_classes-1).
+        output_dir (str): Folder where images will be saved.
+        count (int): Number of images to generate.
+    """
+    # Buat one-hot labels batch
+    label_vector = np.zeros((count, num_classes))
     label_vector[:, class_id] = 1
 
     # Random latent vector
-    z = np.random.normal(size=(num_images, latent_dim))
+    z = np.random.normal(size=(count, latent_dim))
 
     # Gabungkan latent vector dengan label
     z_with_label = np.concatenate([z, label_vector], axis=-1)
 
-    # Decode gambar
-    generated_image = cvae.decode(z_with_label)[0].numpy()
+    # Decode batch gambar
+    generated_images = cvae.decode(z_with_label).numpy()  # Shape: (count, H, W, C)
 
-    # Konversi ke format gambar
-    img_array = (generated_image * 255).astype(np.uint8)
-    img = Image.fromarray(img_array)
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
+    for i in range(count):
+        img_array = (generated_images[i] * 255).astype(np.uint8)
+        img = Image.fromarray(img_array)
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
 
-    # Simpan ke file jika diminta
-    if save_path:
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        img_name = f"{uuid.uuid4()}.png"
+        save_path = os.path.join(output_dir, img_name)
         img.save(save_path)
-
-    # Simpan ke buffer (untuk dikirim sebagai response API misalnya)
-    img_bytes = BytesIO()
-    img.save(img_bytes, format='PNG')
-    img_bytes.seek(0)
-
-    return img_bytes  # bisa dikembalikan sebagai StreamingResponse
 
 
 # Ini kode Debugging =============================================

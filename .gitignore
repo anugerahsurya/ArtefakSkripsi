@@ -3,3 +3,7 @@ weights/
 .weights/
 .weights
 weights
+
+generated_images/
+.generated_images
+generated_images

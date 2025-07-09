@@ -9,7 +9,7 @@ import tempfile
 
 from models.acgan import generate_acgan
 from models.cvae import generate_cvae
-# from models.cddpm import generate_cddpm
+from models.cddpm import generate_cddpm
 
 router = APIRouter()
 
@@ -37,24 +37,28 @@ async def generate_images(req: GenerateRequest):
     results: Dict[str, List[str]] = {}
 
     for cls in classes:
+        cls_dir = os.path.join(OUTPUT_DIR, str(uuid.uuid4()))
+        os.makedirs(cls_dir, exist_ok=True)
+
+        # Panggil generator untuk menghasilkan banyak gambar sekaligus
+        if model == "acgan":
+            generate_acgan(cls, cls_dir, image_count)
+        elif model == "cvae":
+            generate_cvae(cls, cls_dir, image_count)
+        elif model == "cddpm":
+            generate_cddpm(cls, cls_dir, image_count)
+        else:
+            return JSONResponse(content={"error": "Model tidak valid."}, status_code=400)
+
+        # Ambil semua file yang baru dihasilkan
         cls_images = []
-        for _ in range(image_count):
-            img_name = f"{uuid.uuid4()}.png"
-            img_path = os.path.join(OUTPUT_DIR, img_name)
+        for fname in sorted(os.listdir(cls_dir)):
+            full_path = os.path.join(cls_dir, fname)
+            last_generated_files.append(full_path)
+            cls_images.append(f"/generated/{os.path.basename(full_path)}")
 
-            # Panggil fungsi generator
-            if model == "acgan":
-                generate_acgan(cls, img_path)
-            elif model == "cvae":
-                generate_cvae(cls, img_path)
-            elif model == "cddpm":
-                generate_cddpm(cls, img_path)
-            else:
-                return JSONResponse(content={"error": "Model tidak valid."}, status_code=400)
-
-            # Simpan hasil untuk ditampilkan & diunduh
-            cls_images.append(f"/generated/{img_name}")
-            last_generated_files.append(img_path)
+            # Pindahkan ke OUTPUT_DIR root agar bisa diakses frontend (jika perlu)
+            os.rename(full_path, os.path.join(OUTPUT_DIR, os.path.basename(full_path)))
 
         results[str(cls)] = cls_images
 
