@@ -1,0 +1,5 @@
+# Ignore folder weights and all its contents
+weights/
+.weights/
+.weights
+weights

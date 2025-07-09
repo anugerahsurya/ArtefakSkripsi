@@ -6,6 +6,9 @@ from PIL import Image
 import io
 from prediksiYOLO import predict_image
 
+# Import router baru
+from routers import generative
+
 app = FastAPI()
 
 app.add_middleware(
@@ -15,7 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ Definisikan route duluan
+# ➕ Tambahkan router untuk endpoint /generate
+app.include_router(generative.router)
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
@@ -26,6 +31,7 @@ async def predict(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-# ⛔ Baru mount StaticFile di akhir
+# Static file
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+app.mount("/generated", StaticFiles(directory="generated_images"), name="generated")
 app.mount("/", StaticFiles(directory=".", html=True), name="static")

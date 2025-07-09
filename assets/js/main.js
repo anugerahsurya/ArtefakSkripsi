@@ -279,11 +279,22 @@ function renderPreview(imagesByClass, selectedClasses) {
   });
 }
 
+// Kelengkapan untuk Generate Model tujuan1.html
+
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("generateForm");
   const downloadBtn = document.getElementById("downloadBtn");
   const resetBtn = document.getElementById("resetBtn");
   const previewContainer = document.getElementById("previewContainer");
+
+  const loadingSpinner = document.createElement("div");
+  loadingSpinner.className = "text-center my-4";
+  loadingSpinner.innerHTML = `
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Memproses gambar sintetis, mohon tunggu...</p>
+  `;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -309,19 +320,28 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Dummy data generator
-    const imagesByClass = {};
-    selectedClasses.forEach(({ value }) => {
-      imagesByClass[value] = Array.from({ length: imageCount }, (_, i) => {
-        return `https://picsum.photos/seed/${value}-${i}/128/128`;
+    previewContainer.innerHTML = "";
+    previewContainer.appendChild(loadingSpinner);
+    downloadBtn.disabled = true;
+
+    fetch("http://localhost:8000/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model,
+        image_count: imageCount,
+        classes: selectedClasses.map((c) => parseInt(c.value)),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        renderCarousel(data.generated, selectedClasses);
+        downloadBtn.disabled = false;
+      })
+      .catch((err) => {
+        console.error("Gagal generate gambar:", err);
+        alert("Terjadi kesalahan saat menghubungi server.");
       });
-    });
-
-    // Tampilkan preview
-    renderPreview(imagesByClass, selectedClasses);
-
-    // Aktifkan tombol download
-    downloadBtn.disabled = false;
   });
 
   resetBtn.addEventListener("click", function () {
@@ -330,13 +350,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   downloadBtn.addEventListener("click", function () {
-    alert(
-      "ZIP download akan diimplementasikan di sisi backend atau pakai JSZip nanti."
-    );
+    fetch("http://localhost:8000/download")
+      .then((res) => {
+        if (!res.ok) throw new Error("Gagal download ZIP");
+        return res.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "generated_images.zip";
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((err) => {
+        alert("Gagal mengunduh ZIP: " + err.message);
+      });
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+  // Update ikon centang checkbox
   const allCheckboxes = document.querySelectorAll(
     'input[type="checkbox"][id^="class"]'
   );
@@ -346,10 +378,8 @@ document.addEventListener("DOMContentLoaded", function () {
       `.icon-check[data-id="${checkbox.value}"]`
     );
 
-    // Initial state
-    updateIcon(checkbox, icon);
+    updateIcon(checkbox, icon); // Initial state
 
-    // Toggle on change
     checkbox.addEventListener("change", () => {
       updateIcon(checkbox, icon);
     });
@@ -364,19 +394,72 @@ document.addEventListener("DOMContentLoaded", function () {
       icon.classList.add("fa-square");
     }
   }
-});
-document.addEventListener("DOMContentLoaded", function () {
+
+  // Tampilkan form saat tombol diklik
   const showFormBtn = document.getElementById("showFormBtn");
   const cgmFormContainer = document.getElementById("cgmFormContainer");
 
   showFormBtn.addEventListener("click", function () {
     cgmFormContainer.classList.remove("d-none");
-    showFormBtn.classList.add("d-none"); // Sembunyikan tombol setelah diklik
+    showFormBtn.classList.add("d-none");
     window.scrollTo({
       top: cgmFormContainer.offsetTop - 60,
       behavior: "smooth",
     });
   });
+
+  // Render carousel Bootstrap
+  function renderCarousel(imagesByClass, selectedClasses) {
+    previewContainer.innerHTML = ""; // Hapus spinner
+
+    selectedClasses.forEach(({ value, label }) => {
+      const images = imagesByClass[value] || [];
+      const carouselId = `carousel-${value}`;
+      const col = document.createElement("div");
+      col.className = "col-12 mb-5";
+
+      const title = document.createElement("h5");
+      title.textContent = `Kelas ${label}`;
+      col.appendChild(title);
+
+      const carouselInner = images
+        .reduce((chunks, url, i) => {
+          if (i % 6 === 0) chunks.push([]);
+          chunks[chunks.length - 1].push(url);
+          return chunks;
+        }, [])
+        .map((group, idx) => {
+          return `
+            <div class="carousel-item ${idx === 0 ? "active" : ""}">
+              <div class="d-flex flex-wrap justify-content-center gap-2">
+                ${group
+                  .map(
+                    (url) =>
+                      `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      const carousel = `
+        <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">${carouselInner}</div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      `;
+
+      col.innerHTML += carousel;
+      previewContainer.appendChild(col);
+    });
+  }
 });
 
 // Kelengkapan JS untuk Klasifikasi Citra tujuan3.html
