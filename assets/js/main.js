@@ -414,10 +414,70 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Render carousel Bootstrap
-  function renderCarousel(imagesByClass, selectedClasses) {
-    previewContainer.innerHTML = ""; // Hapus spinner
+  // function renderCarousel(imagesByClass, selectedClasses) {
+  //   previewContainer.innerHTML = ""; // Hapus spinner
 
-    selectedClasses.forEach(({ value, label }) => {
+  //   selectedClasses.forEach(({ value, label }) => {
+  //     const images = imagesByClass[value] || [];
+  //     const carouselId = `carousel-${value}`;
+  //     const col = document.createElement("div");
+  //     col.className = "col-12 mb-5";
+
+  //     const title = document.createElement("h5");
+  //     title.textContent = `Kelas ${label}`;
+  //     col.appendChild(title);
+
+  //     const carouselInner = images
+  //       .reduce((chunks, url, i) => {
+  //         if (i % 6 === 0) chunks.push([]);
+  //         chunks[chunks.length - 1].push(url);
+  //         return chunks;
+  //       }, [])
+  //       .map((group, idx) => {
+  //         const imageElements = group
+  //           .map((url, i) => {
+  //             console.log(`📷 [${idx}-${i}] URL gambar:`, url);
+
+  //             // Cek validitas URL
+  //             if (!url || typeof url !== "string" || !url.startsWith("http")) {
+  //               return `<div class="text-danger">Invalid URL</div>`;
+  //             }
+
+  //             return `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
+  //           })
+  //           .join("");
+
+  //         return `
+  //     <div class="carousel-item ${idx === 0 ? "active" : ""}">
+  //       <div class="d-flex flex-wrap justify-content-center gap-2">
+  //         ${imageElements}
+  //       </div>
+  //     </div>
+  //   `;
+  //       })
+  //       .join("");
+
+  //     const carousel = `
+  //       <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+  //         <div class="carousel-inner">${carouselInner}</div>
+  //         <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+  //           <span class="carousel-control-prev-icon"></span>
+  //         </button>
+  //         <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+  //           <span class="carousel-control-next-icon"></span>
+  //         </button>
+  //       </div>
+  //     `;
+
+  //     col.innerHTML += carousel;
+  //     previewContainer.appendChild(col);
+  //   });
+  // }
+  function renderCarousel(imagesByClass, selectedClasses) {
+    previewContainer.innerHTML = "";
+    previewContainer.appendChild(loadingSpinner); // Tambahkan spinner di awal
+
+    const renderTasks = selectedClasses.map(({ value, label }) => {
       const images = imagesByClass[value] || [];
       const carouselId = `carousel-${value}`;
       const col = document.createElement("div");
@@ -427,39 +487,40 @@ document.addEventListener("DOMContentLoaded", function () {
       title.textContent = `Kelas ${label}`;
       col.appendChild(title);
 
-      const carouselInner = images
-        .reduce((chunks, url, i) => {
-          if (i % 6 === 0) chunks.push([]);
-          chunks[chunks.length - 1].push(url);
-          return chunks;
-        }, [])
-        .map((group, idx) => {
-          const imageElements = group
-            .map((url, i) => {
-              console.log(`📷 [${idx}-${i}] URL gambar:`, url);
+      const groupedImages = images.reduce((chunks, url, i) => {
+        if (i % 6 === 0) chunks.push([]);
+        chunks[chunks.length - 1].push(url);
+        return chunks;
+      }, []);
 
-              // Cek validitas URL
-              if (!url || typeof url !== "string" || !url.startsWith("http")) {
-                return `<div class="text-danger">Invalid URL</div>`;
-              }
-
-              return `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
+      const carouselInnerPromises = groupedImages.map((group, idx) =>
+        Promise.all(
+          group.map((url, i) =>
+            fetch(url, {
+              headers: { "ngrok-skip-browser-warning": "true" },
             })
-            .join("");
-
+              .then((res) => res.blob())
+              .then((blob) => {
+                const imgURL = URL.createObjectURL(blob);
+                return `<img src="${imgURL}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
+              })
+              .catch(() => `<div class="text-danger">Gagal load</div>`)
+          )
+        ).then((imageElements) => {
           return `
-      <div class="carousel-item ${idx === 0 ? "active" : ""}">
-        <div class="d-flex flex-wrap justify-content-center gap-2">
-          ${imageElements}
-        </div>
-      </div>
-    `;
+            <div class="carousel-item ${idx === 0 ? "active" : ""}">
+              <div class="d-flex flex-wrap justify-content-center gap-2">
+                ${imageElements.join("")}
+              </div>
+            </div>
+          `;
         })
-        .join("");
+      );
 
-      const carousel = `
+      return Promise.all(carouselInnerPromises).then((carouselItemsHTML) => {
+        const carousel = `
         <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">${carouselInner}</div>
+          <div class="carousel-inner">${carouselItemsHTML.join("")}</div>
           <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </button>
@@ -468,9 +529,15 @@ document.addEventListener("DOMContentLoaded", function () {
           </button>
         </div>
       `;
+        col.innerHTML += carousel;
+        previewContainer.appendChild(col);
+      });
+    });
 
-      col.innerHTML += carousel;
-      previewContainer.appendChild(col);
+    // Hapus spinner setelah semua kelas selesai di-render
+    Promise.all(renderTasks).then(() => {
+      const spinner = document.querySelector(".spinner-border")?.parentElement;
+      if (spinner) spinner.remove();
     });
   }
 });
