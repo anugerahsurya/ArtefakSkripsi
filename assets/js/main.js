@@ -10,7 +10,6 @@ const API_BASE =
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
     : "https://5711e533f36d.ngrok-free.app"; // ← Ganti sesuai ngrok
-const API_RENDER = halo;
 
 (function () {
   "use strict";
