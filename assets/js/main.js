@@ -355,7 +355,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   downloadBtn.addEventListener("click", function () {
-    fetch(`${API_BASE}/download`)
+    fetch(`${API_BASE}/download`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    })
       .then((res) => {
         if (!res.ok) throw new Error("Gagal download ZIP");
         return res.blob();
@@ -365,7 +369,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const a = document.createElement("a");
         a.href = url;
         a.download = "generated_images.zip";
+        a.style.display = "none";
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       })
       .catch((err) => {
