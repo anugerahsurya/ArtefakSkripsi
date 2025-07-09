@@ -1,10 +1,8 @@
 # Ignore folder weights and all its contents
 weights/*
-
-# Kecualikan file tertentu
-!weights/best.pt
-!weights/ResNet34-CroppingBlackArea-finetune.pkl
-
+.weights
+weights/
+weights
 
 generated_images/
 .generated_images
