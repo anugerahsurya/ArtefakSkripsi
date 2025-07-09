@@ -4,13 +4,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from PIL import Image
 import io
-from prediksiYOLO import predict_image
 
-# Import router baru
+from prediksiYOLO import predict_image
 from routers import generative
 
 app = FastAPI()
 
+# CORS setup
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,9 +18,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ➕ Tambahkan router untuk endpoint /generate
+# Include router tambahan
 app.include_router(generative.router)
 
+# Endpoint utama
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
@@ -31,7 +32,7 @@ async def predict(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-# Static file
+# Serve file statis
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 app.mount("/generated", StaticFiles(directory="generated_images"), name="generated")
 app.mount("/", StaticFiles(directory=".", html=True), name="static")

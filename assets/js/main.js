@@ -9,8 +9,9 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://61a0678ff350.ngrok-free.app"; // ← Ganti sesuai ngrok
-console.log("API : ", API_BASE);
+    : "https://3854502a890c.ngrok-free.app"; // ← Ganti sesuai ngrok
+const API_RENDER = halo;
+
 (function () {
   "use strict";
 
@@ -561,7 +562,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("file", file);
 
       try {
-        const res = await fetch(`${API_BASE}/predict`, {
+        const res = await fetch(`${API_RENDER}/predict`, {
           method: "POST",
           body: formData,
         });
