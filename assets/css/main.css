@@ -917,6 +917,16 @@ section,
   }
 }
 
+.kutipan {
+  font-family: "Poppins", sans-serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #f0f0f0;
+  text-align: justify;
+  max-width: 1000px;
+  opacity: 0.6;
+}
+
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
