@@ -678,7 +678,7 @@ const formContainer = document.getElementById("cgmFormContainer");
 
 // Tampilkan tombol saat scroll
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 200) {
+  if (window.scrollY > 10) {
     floatingBtn.classList.remove("d-none");
   } else {
     floatingBtn.classList.add("d-none");
