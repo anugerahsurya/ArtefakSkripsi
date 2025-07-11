@@ -3375,6 +3375,36 @@ body {
   background-color: #f8f9fa;
 }
 
+/* Tombol Mengambang (Floating) */
+#floatingCgmBtn {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  z-index: 1050;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Warna & Gaya Accent */
+.btn-accent {
+  background-color: var(--contrast-color) !important;
+  color: var(--accent-color) !important;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
 #generateForm .form-check-input:checked {
   background-color: #0d6efd;
   border-color: #0d6efd;

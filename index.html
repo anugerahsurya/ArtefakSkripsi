@@ -141,17 +141,13 @@
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <h2 class="section-heading">Analisis Citra</h2>
+              <h2 class="section-heading">Klasifikasi Citra</h2>
               <p class="lead">
-                Data citra merupakan jenis data yang sering dijadikan sebagai
-                sumber informasi dan berbagai analisis pemodelan karena
-                ketersediaannya yang tinggi serta kemudahan dalam
-                pemerolehannya. <b>Algoritma machine learning</b> dan
-                <b>deep learning</b> sering digunakan sebagai alat dalam
-                <b>pengolahan data citra</b> karena kemampuannya dalam
-                <b>mengesktrak pola</b> yang terdapat pada data tersebut. Salah
-                satu bentuk pemrosesan yang paling umum dan penting dalam
-                konteks data citra adalah <b>klasifikasi citra</b>.
+                Klasifikasi citra merupakan proses mengelompokkan gambar ke
+                dalam kelas-kelas tertentu berdasarkan fitur atau pola visual
+                yang dikandungnya. Proses ini menjadi salah satu tugas dasar
+                dalam <b>pengolahan citra</b>, terutama ketika sistem perlu
+                mengenali dan membedakan objek secara otomatis.
               </p>
             </div>
           </div>
@@ -171,10 +167,10 @@
                 </div>
                 <h4>Penginderaan Jauh</h4>
                 <p>
-                  Pemanfaatan citra satelit atau drone untuk mengamati permukaan
-                  bumi. Aplikasi meliputi pemetaan lahan, deteksi perubahan
-                  tutupan lahan, pemantauan kebakaran hutan, dan perencanaan
-                  wilayah.
+                  Klasifikasi citra dengan teknik penginderaan jauh untuk
+                  mengelompokkan tutupan dan jenis penggunaan lahan atau
+                  mendeteksi kebakaran hutan. Proses ini penting dalam pemetaan
+                  wilayah dan perencanaan tata ruang.
                 </p>
               </div>
             </div>
@@ -190,10 +186,10 @@
                 </div>
                 <h4>Aplikasi Medis</h4>
                 <p>
-                  Analisis citra medis seperti MRI, CT-Scan, atau X-ray untuk
-                  deteksi dan diagnosis penyakit. Contohnya: identifikasi tumor,
-                  klasifikasi sel kanker, serta deteksi pneumonia dari citra
-                  thorax.
+                  Klasifikasi citra medis seperti MRI, CT-Scan, atau X-ray untuk
+                  mengidentifikasi kondisi atau penyakit tertentu. Contohnya
+                  meliputi deteksi tumor, klasifikasi sel kanker, dan diagnosis
+                  pneumonia dari citra thorax.
                 </p>
               </div>
             </div>
@@ -209,10 +205,10 @@
                 </div>
                 <h4>Industri</h4>
                 <p>
-                  Penggunaan kamera dan algoritma visi komputer dalam kontrol
-                  kualitas, inspeksi produk, atau deteksi kerusakan otomatis
-                  pada lini produksi. Memastikan standar kualitas dan efisiensi
-                  proses.
+                  Klasifikasi citra dalam proses produksi untuk membedakan
+                  produk cacat dan tidak cacat, mengelompokkan jenis komponen,
+                  atau mendeteksi kerusakan visual secara otomatis dalam
+                  inspeksi kualitas.
                 </p>
               </div>
             </div>
@@ -228,9 +224,10 @@
                 </div>
                 <h4>Lingkungan</h4>
                 <p>
-                  Pemantauan kondisi lingkungan melalui citra seperti deteksi
-                  polusi air, pemantauan kualitas udara, perubahan iklim, serta
-                  kesehatan vegetasi.
+                  Klasifikasi citra lingkungan untuk mengidentifikasi jenis
+                  vegetasi, mendeteksi wilayah terdampak polusi, atau
+                  mengklasifikasikan kualitas perairan dan udara melalui
+                  pengamatan visual berbasis citra.
                 </p>
               </div>
             </div>
@@ -267,13 +264,19 @@
             >
               <div class="about-content-box">
                 <h3>
-                  <span class="text-danger">Permasalahan</span> pada Klasifikasi
-                  Citra
+                  Apa yang Terjadi Saat
+                  <span class="text-danger">Terlalu Banyak Kelas</span> dan
+                  <span class="text-danger">Data Tidak Seimbang</span>?
                 </h3>
-                <p class="mb-4">
-                  Namun, dalam <b>pengolahan data citra</b> menggunakan
-                  algoritma machine learning dan deep learning, terdapat
-                  <b>beberapa tantangan</b> yang sering dijumpai.
+
+                <p class="mb-4" style="text-align: justify">
+                  Dalam <b>pengolahan citra</b> menggunakan algoritma machine
+                  learning maupun deep learning, muncul sejumlah
+                  <b>tantangan mendasar</b> yang dapat memengaruhi kinerja model
+                  secara signifikan. Dua di antaranya adalah
+                  <b>klasifikasi <i>multiclass</i></b> dan
+                  <b>ketidakseimbangan data</b>, yang sering kali muncul dalam
+                  kasus-kasus nyata di domain medis.
                 </p>
 
                 <!-- <div class="progress-item"> -->
@@ -289,7 +292,7 @@
                       title="Masalah klasifikasi yang melibatkan lebih dari dua kelas."
                       style="cursor: pointer"
                     >
-                      Multiclass
+                      <i>Multiclass</i>
                     </div>
 
                     <div class="point-desc">
@@ -312,7 +315,7 @@
                         title="Dataset yang memiliki jumlah data tidak seimbang antara kelas."
                         style="cursor: pointer"
                       >
-                        Imbalanced Dataset
+                        <i>Imbalanced Dataset</i>
                       </span>
                     </div>
                     <div class="point-desc">
@@ -341,14 +344,14 @@
           >
             <div class="stats-overview text-center text-lg-start">
               <h3>
-                <span class="text-success">Solusi</span> untuk Permasalahan
-                Multiclass dan Imbalanced Dataset
+                <span class="text-success">Membangun Data Baru</span> dengan
+                Pendekatan Generatif
               </h3>
               <p style="text-align: justify">
-                Permasalahan <strong>multiclass</strong> dan data
-                <strong>tidak seimbang</strong> dapat menurunkan akurasi dan
-                menyebabkan model <strong>bias</strong>. Salah satu solusinya
-                adalah <strong>augmentasi data</strong> dengan
+                Permasalahan pada kondisi <strong><i>multiclass</i></strong> dan
+                data <strong>tidak seimbang</strong> dapat menurunkan akurasi
+                dan menyebabkan model <strong>bias</strong>. Salah satu
+                solusinya adalah <strong>augmentasi data</strong> dengan
                 <strong>model generatif</strong> seperti <strong>GAN</strong>,
                 <strong>VAE</strong>, dan <strong>Diffusion</strong> untuk
                 menambah sampel kelas minoritas. Namun, dibutuhkan versi
@@ -428,7 +431,16 @@
     </section>
 
     <!-- Section : CGM ACGAN-->
-    <section id="stats" class="stats section light-background">
+    <section id="stats" class="stats section light-background py-4">
+      <!-- Judul Section -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>
+          Pendekatan Conditional Generative Model untuk Mengatasi Ketimpangan
+          dalam Klasifikasi Citra Medis
+        </h2>
+      </div>
+
+      <!-- Isi Section -->
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 align-items-center">
           <!-- Kolom Teks -->
@@ -445,12 +457,12 @@
               <p style="text-align: justify">
                 Model ACGAN terdiri dari generator dan discriminator yang di
                 mana generator ditambahkan dengan input berupa dimensi laten
-                serta label pada citra. Selain itu pada discriminator juga
+                serta label pada citra. Selain itu, pada discriminator juga
                 ditambahkan input berupa label citra serta lapisan terakhir
                 berupa auxiliary classifier yang bertujuan untuk
                 mengklasifikasikan sebuah sampel yang diberikan berasal dari
                 suatu class. Kondisi yang ada pada generator serta discriminator
-                tersebut menjadi karakteristik dari model ACGAN
+                tersebut menjadi karakteristik dari model ACGAN.
               </p>
             </div>
           </div>
@@ -471,6 +483,7 @@
         </div>
       </div>
     </section>
+
     <!-- /Stats Section -->
 
     <!-- Section : CGM CVAE-->

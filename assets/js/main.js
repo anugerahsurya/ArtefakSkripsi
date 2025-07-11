@@ -671,3 +671,22 @@ document.addEventListener("DOMContentLoaded", () => {
     switchCameraBtn.style.display = "none";
   }
 });
+
+// Floating button untuk cgm
+const floatingBtn = document.getElementById("floatingCgmBtn");
+const formContainer = document.getElementById("cgmFormContainer");
+
+// Tampilkan tombol saat scroll
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    floatingBtn.classList.remove("d-none");
+  } else {
+    floatingBtn.classList.add("d-none");
+  }
+});
+
+// Saat tombol diklik, munculkan form
+floatingBtn.addEventListener("click", () => {
+  formContainer.classList.remove("d-none");
+  formContainer.scrollIntoView({ behavior: "smooth" });
+});
