@@ -9,7 +9,7 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://2b11a445d173.ngrok-free.app"; // ← Ganti sesuai ngrok
+    : "https://09738fe944e9.ngrok-free.app"; // ← Ganti sesuai ngrok
 
 (function () {
   "use strict";
