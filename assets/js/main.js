@@ -9,7 +9,7 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://09738fe944e9.ngrok-free.app"; // ← Ganti sesuai ngrok
+    : "https://93440d42f99c.ngrok-free.app"; // ← Ganti sesuai ngrok
 
 (function () {
   "use strict";
@@ -420,66 +420,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Render carousel Bootstrap
-  // function renderCarousel(imagesByClass, selectedClasses) {
-  //   previewContainer.innerHTML = ""; // Hapus spinner
-
-  //   selectedClasses.forEach(({ value, label }) => {
-  //     const images = imagesByClass[value] || [];
-  //     const carouselId = `carousel-${value}`;
-  //     const col = document.createElement("div");
-  //     col.className = "col-12 mb-5";
-
-  //     const title = document.createElement("h5");
-  //     title.textContent = `Kelas ${label}`;
-  //     col.appendChild(title);
-
-  //     const carouselInner = images
-  //       .reduce((chunks, url, i) => {
-  //         if (i % 6 === 0) chunks.push([]);
-  //         chunks[chunks.length - 1].push(url);
-  //         return chunks;
-  //       }, [])
-  //       .map((group, idx) => {
-  //         const imageElements = group
-  //           .map((url, i) => {
-  //             console.log(`📷 [${idx}-${i}] URL gambar:`, url);
-
-  //             // Cek validitas URL
-  //             if (!url || typeof url !== "string" || !url.startsWith("http")) {
-  //               return `<div class="text-danger">Invalid URL</div>`;
-  //             }
-
-  //             return `<img src="${url}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
-  //           })
-  //           .join("");
-
-  //         return `
-  //     <div class="carousel-item ${idx === 0 ? "active" : ""}">
-  //       <div class="d-flex flex-wrap justify-content-center gap-2">
-  //         ${imageElements}
-  //       </div>
-  //     </div>
-  //   `;
-  //       })
-  //       .join("");
-
-  //     const carousel = `
-  //       <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
-  //         <div class="carousel-inner">${carouselInner}</div>
-  //         <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-  //           <span class="carousel-control-prev-icon"></span>
-  //         </button>
-  //         <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-  //           <span class="carousel-control-next-icon"></span>
-  //         </button>
-  //       </div>
-  //     `;
-
-  //     col.innerHTML += carousel;
-  //     previewContainer.appendChild(col);
-  //   });
-  // }
   function renderCarousel(imagesByClass, selectedClasses) {
     previewContainer.innerHTML = "";
     previewContainer.appendChild(loadingSpinner); // Tambahkan spinner di awal
@@ -713,3 +653,5 @@ showFormBtn.addEventListener("click", () => {
 
   floatingBtn.classList.add("d-none");
 });
+
+// Switch Button Generate dan Klasifikasi

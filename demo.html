@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Perbandingan Conditional Generative Model</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="assets/img/logostis.png" rel="icon" />
+    <link href="assets/img/logostis.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- =======================================================
+  * Template Name: Scout
+  * Template URL: https://bootstrapmade.com/scout-bootstrap-multipurpose-template/
+  * Updated: May 05 2025 with Bootstrap v5.3.5
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a
+          href="index.html"
+          class="logo d-flex align-items-center me-auto text-decoration-none"
+        >
+          <img src="assets/img/logostis.png" alt="Logo" style="height: 40px" />
+          <div class="ms-2">
+            <h6 class="sitename mb-0"><b>Politeknik Statistika STIS</b></h6>
+            <small class="text-muted">Anugerah Surya Atmaja</small>
+          </div>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Pendahuluan</a></li>
+            <!-- <li><a href="metodologi.html">Metodologi</a></li> -->
+            <li><a href="tujuan1.html">Sintesis Citra</a></li>
+            <li><a href="tujuan2.html">Perbandingan CGM</a></li>
+            <li><a href="tujuan3.html">Uji Efektivitas</a></li>
+            <li><a href="demo.html" class="active">Demo</a></li>
+
+            <!-- <li><a href="#contact">Contact</a></li> -->
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <!-- <a class="btn-getstarted" href="index.html#about">Get Started</a> -->
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container py-5" id="cgmFormContainer">
+        <h2 class="text-center mb-4">Inference Conditional Generative Model</h2>
+
+        <!-- Form Controls -->
+        <form id="generateForm" class="p-4 border rounded shadow-sm bg-white">
+          <div class="row g-4">
+            <!-- Kolom 1: Model + Jumlah Citra -->
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="modelSelect" class="form-label fw-semibold"
+                  >Pilih Model</label
+                >
+                <select class="form-select" id="modelSelect" required>
+                  <option value="" disabled selected>-- Pilih Model --</option>
+                  <option value="acgan">ACGAN</option>
+                  <option value="cvae">cVAE</option>
+                  <option value="cddpm">CDDPM</option>
+                </select>
+              </div>
+              <div>
+                <label for="imageCount" class="form-label fw-semibold"
+                  >Jumlah Citra</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="imageCount"
+                  min="1"
+                  max="100"
+                  value="8"
+                  required
+                />
+                <div class="form-text">Maksimum 100 gambar.</div>
+              </div>
+            </div>
+
+            <!-- Kolom 2: Pilih Kelas -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Pilih Kelas</label>
+              <div class="row row-cols-1 row-cols-md-2 g-2">
+                <!-- Class 0 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="0"
+                      id="class0"
+                      data-label="Actinic Keratosis"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class0"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="0"
+                      ></i>
+                      <span>Actinic Keratosis</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 1 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="1"
+                      id="class1"
+                      data-label="Basal Cell Carcinoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class1"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="1"
+                      ></i>
+                      <span>Basal Cell Carcinoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 2 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="2"
+                      id="class2"
+                      data-label="Benign Keratosis"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class2"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="2"
+                      ></i>
+                      <span>Benign Keratosis</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 3 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="3"
+                      id="class3"
+                      data-label="Dermatofibroma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class3"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="3"
+                      ></i>
+                      <span>Dermatofibroma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 4 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="4"
+                      id="class4"
+                      data-label="Melanocytic Nevi"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class4"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="4"
+                      ></i>
+                      <span>Melanocytic Nevi</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 5 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="5"
+                      id="class5"
+                      data-label="Melanoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class5"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="5"
+                      ></i>
+                      <span>Melanoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 6 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="6"
+                      id="class6"
+                      data-label="Squamous Cell Carcinoma"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class6"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="6"
+                      ></i>
+                      <span>Squamous Cell Carcinoma</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Class 7 -->
+                <div class="col">
+                  <div
+                    class="form-check d-flex align-items-center gap-2 class-check"
+                  >
+                    <input
+                      class="form-check-input d-none"
+                      type="checkbox"
+                      value="7"
+                      id="class7"
+                      data-label="Vascular Skin Lesion"
+                    />
+                    <label
+                      class="class-label d-flex align-items-center gap-2"
+                      for="class7"
+                    >
+                      <i
+                        class="fa-regular fa-square icon-check"
+                        data-id="7"
+                      ></i>
+                      <span>Vascular Skin Lesion</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-4 me-2">
+              Generate
+            </button>
+            <button
+              type="button"
+              class="btn btn-success px-4 me-2"
+              id="downloadBtn"
+              disabled
+            >
+              Download ZIP
+            </button>
+            <button type="reset" class="btn btn-secondary px-4" id="resetBtn">
+              Reset
+            </button>
+          </div>
+        </form>
+
+        <!-- Preview Section -->
+        <div id="previewContainer" class="row gy-4 mt-5">
+          <!-- Hasil preview akan muncul di sini -->
+        </div>
+      </div>
+      <section id="stats" class="stats section" style="padding-top: 0">
+        <div class="container pt-3 pb-4">
+          <div class="row justify-content-center align-items-start">
+            <!-- Kiri: Tips + Form -->
+            <div class="col-lg-6">
+              <!-- Tips -->
+              <div class="card shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                  <h5 class="card-title text-warning">
+                    Tips Pengambilan Gambar
+                  </h5>
+
+                  <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-bullseye"></i></div>
+                    <span>Pastikan objek berada di tengah.</span>
+                  </div>
+
+                  <div class="tip-item">
+                    <div class="tip-icon">
+                      <i class="fas fa-hand-point-up"></i>
+                    </div>
+                    <span>Objek harus merupakan bagian dari kulit.</span>
+                  </div>
+
+                  <div class="tip-item">
+                    <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+                    <span>Ambil gambar di tempat yang terang.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Upload -->
+              <div class="card shadow rounded-4">
+                <div class="card-body">
+                  <h4 class="card-title mb-4 text-primary">
+                    Klasifikasi Lesi Kulit
+                  </h4>
+
+                  <form id="imageForm">
+                    <div class="mb-3">
+                      <label for="imageUpload" class="form-label"
+                        >Upload Gambar</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="imageUpload"
+                        accept="image/*"
+                      />
+                    </div>
+
+                    <div class="mb-3 text-center">
+                      <label class="form-label d-block"
+                        >Atau gunakan Kamera</label
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary me-2"
+                        onclick="openCamera()"
+                      >
+                        Buka Kamera
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-info"
+                        id="switchCameraBtn"
+                        onclick="switchCamera()"
+                      >
+                        Ganti Kamera
+                      </button>
+                    </div>
+
+                    <div class="mb-3 d-none" id="cameraSection">
+                      <div class="position-relative w-100">
+                        <!-- Video Preview -->
+                        <video
+                          id="cameraPreview"
+                          autoplay
+                          class="w-100 rounded border"
+                        ></video>
+
+                        <!-- Hint di atas bounding box -->
+                        <div
+                          class="position-absolute top-0 start-50 translate-middle-x text-danger text-center fw-semibold"
+                          style="z-index: 10; padding-top: 2rem"
+                        >
+                          <small
+                            >Pastikan objek berada di dalam kotak ini</small
+                          >
+                        </div>
+
+                        <!-- Bounding Box Fokus -->
+                        <div
+                          id="boundingBox"
+                          class="position-absolute top-50 start-50 translate-middle border border-danger"
+                          style="
+                            width: 50%;
+                            height: 50%;
+                            pointer-events: none;
+                            border-width: 2em;
+                            border-style: dashed;
+                            border-radius: 0.5rem;
+                          "
+                        ></div>
+                      </div>
+
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-success mt-2"
+                        onclick="captureImage()"
+                      >
+                        Ambil Gambar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kanan: Hasil -->
+            <div class="col-lg-6 mt-4 mt-lg-0">
+              <div class="card shadow rounded-4">
+                <div class="card-body text-center">
+                  <h5 class="card-title mb-3">Hasil Klasifikasi</h5>
+                  <img
+                    id="previewImage"
+                    src="#"
+                    alt="Preview"
+                    class="img-fluid rounded mb-3 d-none"
+                  />
+                  <button id="classifyBtn" class="btn btn-primary d-none mb-3">
+                    Klasifikasikan
+                  </button>
+                  <div
+                    id="classificationResult"
+                    class="alert alert-info d-none"
+                  >
+                    <strong>Hasil:</strong> <span id="resultText">...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer position-relative light-background">
+      <div class="container text-center py-5">
+        <!-- Nama Aplikasi -->
+        <h3 class="sitename mb-3">Anugerah Surya Atmaja</h3>
+
+        <!-- Logo Sosial Media -->
+        <div class="social-links d-flex justify-content-center mb-4">
+          <a
+            href="https://www.linkedin.com/in/anugerah-surya-atmaja-a0259636b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            class="mx-2"
+            ><i class="bi bi-linkedin fs-4"></i
+          ></a>
+          <a href="https://github.com/anugerahsurya" class="mx-2"
+            ><i class="bi bi-github fs-4"></i
+          ></a>
+          <a href="https://instagram.com/anugerahhsurya" class="mx-2"
+            ><i class="bi bi-instagram fs-4"></i
+          ></a>
+        </div>
+
+        <!-- Keterangan Hak Cipta -->
+        <div class="copyright">
+          <p>© <strong>Artefak Skripsi</strong>. All Rights Reserved</p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+      const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+      tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
+    </script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
