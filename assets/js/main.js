@@ -612,46 +612,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Tampilkan tombol saat scroll
-const floatingBtn = document.getElementById("floatingCgmBtn");
-const showFormBtn = document.getElementById("showFormBtn");
-const formContainer = document.getElementById("cgmFormContainer"); // pastikan ini ada di HTML
-
-let floatingBtnClicked = false;
-
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const bodyHeight = document.body.offsetHeight;
-
-  const nearBottom = scrollTop + windowHeight >= bodyHeight - 50; // jarak 50px dari bawah
-
-  // Sembunyikan tombol mengambang jika sudah scroll ke bawah sekali
-  if (nearBottom || floatingBtnClicked) {
-    floatingBtn.classList.add("d-none");
-  } else if (scrollTop > 10) {
-    floatingBtn.classList.remove("d-none");
-  } else {
-    floatingBtn.classList.add("d-none");
-  }
-});
-
-// Ketika tombol mengambang diklik
-floatingBtn.addEventListener("click", () => {
-  floatingBtnClicked = true;
-  formContainer.classList.remove("d-none");
-  formContainer.scrollIntoView({ behavior: "smooth" });
-
-  // Sembunyikan tombol utama
-  showFormBtn.classList.add("d-none");
-});
-
-// Tambahkan logika kalau tombol utama diklik langsung juga
-showFormBtn.addEventListener("click", () => {
-  formContainer.classList.remove("d-none");
-  formContainer.scrollIntoView({ behavior: "smooth" });
-
-  floatingBtn.classList.add("d-none");
-});
-
 // Switch Button Generate dan Klasifikasi

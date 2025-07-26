@@ -221,17 +221,164 @@
                   <p class="text-start"><strong>Sumber:</strong> Peneliti</p>
                 </div>
               </div>
-              <div class="text-justify mt-4">
-                <p class="lead explanation">
-                  Gambar tersebut menunjukkan adanya ketidakseimbangan data
-                  dengan imbalanced ratio sebesar 56,44% antara class dengan
-                  proporsi tertinggi dan terendah, mengindikasikan kondisi
-                  modestly imbalanced. Hal ini berpotensi menyebabkan bias model
-                  terhadap kelas mayoritas akibat kurangnya informasi pada kelas
-                  minoritas. Kompleksitas meningkat karena dataset bersifat
-                  multiclass dengan 8 kelas, sehingga model harus mampu
-                  membedakan karakteristik masing-masing kelas.
-                </p>
+              <!-- Tombol Navigasi Interpretasi -->
+              <ul
+                class="nav nav-tabs nav-tabs-custom justify-content-center mb-3"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    data-bs-toggle="pill"
+                    data-bs-target="#all"
+                    type="button"
+                    role="tab"
+                  >
+                    Semua
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    data-bs-toggle="pill"
+                    data-bs-target="#p1"
+                    type="button"
+                    role="tab"
+                  >
+                    KID
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    data-bs-toggle="pill"
+                    data-bs-target="#p2"
+                    type="button"
+                    role="tab"
+                  >
+                    FJD
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    data-bs-toggle="pill"
+                    data-bs-target="#p3"
+                    type="button"
+                    role="tab"
+                  >
+                    PRD-AUC
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    data-bs-toggle="pill"
+                    data-bs-target="#p4"
+                    type="button"
+                    role="tab"
+                  >
+                    Running Time
+                  </button>
+                </li>
+              </ul>
+
+              <!-- Konten Interpretasi -->
+              <div class="tab-content" id="interpretationTabsContent">
+                <!-- Semua -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                  <div class="text-justify mt-4">
+                    <!-- Konten tab lain akan ditambahkan di sini secara dinamis -->
+                  </div>
+                </div>
+
+                <!-- Imbalanced Ratio -->
+                <div class="tab-pane fade" id="p1" role="tabpanel">
+                  <div class="text-justify mt-4">
+                    <p class="lead explanation">
+                      Berdasarkan hasil evaluasi pada Tabel V, data sintetis
+                      memberikan hasil paling optimal pada citra berukuran
+                      kecil, yang disebabkan oleh keterbatasan konfigurasi saat
+                      digunakan pada citra berukuran besar. Nilai KID
+                      mengindikasikan bahwa ACGAN memiliki kinerja paling unggul
+                      di semua ukuran citra, terutama pada ukuran 64×64 piksel.
+                      Rata-rata per kelas, ACGAN menunjukkan kemiripan
+                      distribusi fitur antara data sintetis dan data nyata
+                      karena nilai KID yang mendekati nol. Temuan ini konsisten
+                      dengan studi sebelumnya [28], yang menyatakan bahwa ACGAN
+                      mampu menghasilkan citra yang tidak hanya tampak realistis
+                      tetapi juga sesuai dengan label yang diberikan.
+                      Sebaliknya, model cVAE menunjukkan kualitas citra yang
+                      cenderung kabur, mencerminkan ketidaksesuaian dalam
+                      distribusi fitur jika dibandingkan dengan data nyata. Hal
+                      ini sejalan dengan temuan dari penelitian sebelumnya [44],
+                      yang menjelaskan bahwa hasil citra dari VAE cenderung blur
+                      akibat keterbatasan asumsi distribusi Gaussian dalam
+                      proses rekonstruksi.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Dampak ke Model -->
+                <div class="tab-pane fade" id="p2" role="tabpanel">
+                  <div class="text-justify mt-4">
+                    <p class="lead explanation">
+                      Pada metrik FJD, model CDDPM menunjukkan performa terbaik
+                      dengan nilai FJD yang lebih rendah, menandakan tingkat
+                      kemiripan dan kesesuaian label yang lebih baik
+                      dibandingkan model lainnya. Temuan ini sejalan dengan
+                      hasil penelitian sebelumnya \[25], yang menyatakan bahwa
+                      model DDPM mampu menghasilkan citra berkualitas tinggi
+                      dengan distribusi yang lebih menyerupai data nyata melalui
+                      proses denoising bertahap yang stabil, terutama ketika
+                      digunakan dalam skenario generatif bersyarat (conditional
+                      generative model).
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Multiclass -->
+                <div class="tab-pane fade" id="p3" role="tabpanel">
+                  <div class="text-justify mt-4">
+                    <p class="lead explanation">
+                      Pada metrik area di bawah kurva PRD, ACGAN kembali
+                      menunjukkan performa terbaik di semua ukuran citra. Temuan
+                      ini didukung oleh studi [45], yang mengusulkan PRD sebagai
+                      metrik yang lebih representatif dalam mengevaluasi
+                      keseimbangan antara kemiripan terhadap data nyata dan
+                      keberagaman data sintetis. ACGAN terbukti mampu
+                      mempertahankan kedua aspek tersebut dengan lebih baik.
+                      Sebaliknya, model cVAE mencatatkan nilai terendah, yang
+                      mengindikasikan ketidakmampuannya dalam menghasilkan citra
+                      sintetis yang sekaligus menyerupai data nyata dan memiliki
+                      variasi yang cukup.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Tantangan -->
+                <div class="tab-pane fade" id="p4" role="tabpanel">
+                  <div class="text-justify mt-4">
+                    <p class="lead explanation">
+                      Untuk mengukur kecepatan sampling, waktu proses pelatihan
+                      masing-masing model digunakan sebagai pendekatan evaluasi.
+                      Berdasarkan parameter ini, model cVAE menunjukkan waktu
+                      pelatihan tercepat pada ketiga ukuran citra, sedangkan
+                      model CDDPM mencatatkan waktu terlama. Temuan ini sejalan
+                      dengan trilemma dalam pembelajaran generatif, di mana
+                      CDDPM diketahui memiliki kelemahan dalam aspek fast
+                      sampling \[20]. Secara keseluruhan, jika mengacu pada
+                      evaluasi melalui metrik KID, FJD, dan PRD-AUC yang
+                      seluruhnya didominasi oleh ACGAN, dapat disimpulkan bahwa
+                      arsitektur ACGAN berkontribusi signifikan dalam mengatasi
+                      permasalahan mode collapse. Hal ini berdampak langsung
+                      pada peningkatan keberagaman data sintetis yang dihasilkan
+                      \[18], menunjukkan bahwa tantangan terkait cakupan mode
+                      dan keberagaman dalam model GAN dapat diatasi secara
+                      efektif melalui pendekatan ACGAN.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -296,5 +443,25 @@
     <script src="assets/js/main.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const allTab = document.querySelector("#all .text-justify");
+        const tabIds = ["p1", "p2", "p3", "p4"];
+
+        if (!allTab) {
+          console.warn("❗ Tidak ditemukan: #all .text-justify");
+          return;
+        }
+
+        tabIds.forEach((id) => {
+          const sourceTab = document.querySelector(`#${id} .text-justify`);
+          if (sourceTab) {
+            allTab.innerHTML += sourceTab.innerHTML;
+          } else {
+            console.warn(`⚠️ Tidak ditemukan: #${id} .text-justify`);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
