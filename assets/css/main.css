@@ -12,11 +12,10 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway", sans-serif;
-  --nav-font: "Poppins", sans-serif;
+  --default-font: "Poppins", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --heading-font: "Poppins", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --nav-font: "Poppins", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --logo-font: "Raleway", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -76,6 +75,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  overflow-x: hidden;
 }
 
 a {
@@ -172,7 +172,7 @@ h6 {
 }
 
 .header .logo h1 {
-  font-size: 26px;
+  font-size: 1.5em;
   margin: 0;
   font-weight: 600;
   color: var(--heading-color);
@@ -304,7 +304,7 @@ h6 {
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: 10px;
     top: 130%;
     opacity: 0;
     transition: 0.3s;
@@ -314,7 +314,7 @@ h6 {
   }
 
   .navmenu .dropdown ul li {
-    min-width: 200px;
+    min-width: 100px;
   }
 
   .navmenu .dropdown ul a {
@@ -941,7 +941,7 @@ section,
 # About Section
 --------------------------------------------------------------*/
 .about .section-heading {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: var(--heading-color);
   margin-bottom: 1.5rem;
   position: relative;
@@ -1043,7 +1043,7 @@ section,
 }
 
 .about .about-content-box h3 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: var(--heading-color);
   margin-bottom: 1.5rem;
   font-weight: 700;
@@ -1325,7 +1325,7 @@ section,
 }
 
 .stats .stats-overview h3 {
-  font-size: 32px;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 20px;
   position: relative;
@@ -3496,6 +3496,12 @@ table.table-bordered th {
 }
 
 /* Kelengkapan CSS untuk Klasifikasi Lesi Kulit Tujuan 3  */
+
+#classificationResult,
+#classifyBtn {
+  width: 100%;
+}
+
 .tip-item {
   display: flex;
   align-items: center;
