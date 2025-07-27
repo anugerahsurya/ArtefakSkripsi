@@ -591,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (classifyBtn) {
     document.getElementById("explainResult")?.classList.add("d-none");
     classifyBtn.addEventListener("click", async function () {
-      resultText.textContent = "⏳ Memproses...";
+      resultText.textContent = "Memproses...";
       resultContainer.classList.remove("d-none");
 
       const fileInput = imageInput.files[0];
@@ -616,10 +616,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
 
         if (data.error) {
-          resultText.textContent = `❌ Error: ${data.error}`;
+          resultText.textContent = `Error: ${data.error}`;
           resultContainer.classList.replace("alert-info", "alert-danger");
         } else {
-          resultText.textContent = `✅ ${data.label} (${(
+          resultText.textContent = `${data.label} (${(
             data.confidence * 100
           ).toFixed(2)}%)`;
           resultContainer.classList.replace("alert-danger", "alert-info");
@@ -630,7 +630,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       } catch (err) {
-        resultText.textContent = "❌ Gagal terhubung ke server.";
+        resultText.textContent = "Gagal terhubung ke server.";
         resultContainer.classList.replace("alert-info", "alert-danger");
       }
     });
