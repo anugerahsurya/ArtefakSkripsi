@@ -442,8 +442,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const carouselInnerPromises = groupedImages.map((group, idx) =>
         Promise.all(
-          group.map((url, i) =>
-            fetch(url, {
+          group.map((url, i) => {
+            // Normalisasi URL: pakai API_BASE jika URL masih relatif atau mengandung localhost
+            const isFullURL =
+              url.startsWith("http://") || url.startsWith("https://");
+            const isLocalhost =
+              url.includes("localhost") || url.includes("127.0.0.1");
+            const fullURL =
+              isFullURL && !isLocalhost
+                ? url
+                : `${API_BASE}${url.startsWith("/") ? "" : "/"}${url}`;
+
+            return fetch(fullURL, {
               headers: { "ngrok-skip-browser-warning": "true" },
             })
               .then((res) => res.blob())
@@ -451,16 +461,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 const imgURL = URL.createObjectURL(blob);
                 return `<img src="${imgURL}" class="img-thumbnail" style="width: 128px; height: 128px;" loading="lazy">`;
               })
-              .catch(() => `<div class="text-danger">Gagal load</div>`)
-          )
+              .catch(() => `<div class="text-danger">Gagal load</div>`);
+          })
         ).then((imageElements) => {
           return `
-            <div class="carousel-item ${idx === 0 ? "active" : ""}">
-              <div class="d-flex flex-wrap justify-content-center gap-2">
-                ${imageElements.join("")}
-              </div>
-            </div>
-          `;
+      <div class="carousel-item ${idx === 0 ? "active" : ""}">
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          ${imageElements.join("")}
+        </div>
+      </div>
+    `;
         })
       );
 
