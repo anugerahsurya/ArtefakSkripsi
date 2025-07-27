@@ -477,6 +477,9 @@ h6 {
     background: rgba(33, 37, 41, 0.8);
     transition: 0.3s;
   }
+  .mobile-nav-active .navmenu .dropdown > .dropdown-menu {
+    display: block !important;
+  }
 
   .mobile-nav-active .navmenu > ul {
     display: block;
