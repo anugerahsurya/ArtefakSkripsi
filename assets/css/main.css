@@ -3428,6 +3428,11 @@ body {
   font-weight: 500;
 }
 
+#previewContainer > .col-12 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 #previewContainer .card-img-top {
   border-radius: 8px;
   height: 128px;
@@ -3643,4 +3648,48 @@ body {
   font-size: 1.05rem;
   margin-bottom: 0;
   line-height: 1.6;
+}
+
+/* Carousel untuk Generative Model */
+
+.carousel-box {
+  border: 1px solid #dee2e6;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.carousel-box h5 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.carousel-indicators {
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #0d6efd;
+  opacity: 0.5;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
 }

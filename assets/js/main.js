@@ -427,12 +427,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const renderTasks = selectedClasses.map(({ value, label }) => {
       const images = imagesByClass[value] || [];
       const carouselId = `carousel-${value}`;
+      const indicatorId = `carousel-indicators-${value}`;
       const col = document.createElement("div");
       col.className = "col-12 mb-5";
 
+      const box = document.createElement("div");
+      box.className = "carousel-box";
+
       const title = document.createElement("h5");
       title.textContent = `Kelas ${label}`;
-      col.appendChild(title);
+      box.appendChild(title);
 
       const groupedImages = images.reduce((chunks, url, i) => {
         if (i % 6 === 0) chunks.push([]);
@@ -442,8 +446,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const carouselInnerPromises = groupedImages.map((group, idx) =>
         Promise.all(
-          group.map((url, i) => {
-            // Normalisasi URL: pakai API_BASE jika URL masih relatif atau mengandung localhost
+          group.map((url) => {
             const isFullURL =
               url.startsWith("http://") || url.startsWith("https://");
             const isLocalhost =
@@ -465,18 +468,29 @@ document.addEventListener("DOMContentLoaded", function () {
           })
         ).then((imageElements) => {
           return `
-      <div class="carousel-item ${idx === 0 ? "active" : ""}">
-        <div class="d-flex flex-wrap justify-content-center gap-2">
-          ${imageElements.join("")}
-        </div>
-      </div>
-    `;
+          <div class="carousel-item ${idx === 0 ? "active" : ""}">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              ${imageElements.join("")}
+            </div>
+          </div>
+        `;
         })
       );
 
       return Promise.all(carouselInnerPromises).then((carouselItemsHTML) => {
+        const indicators = groupedImages
+          .map((_, i) => {
+            return `<button type="button" data-bs-target="#${carouselId}" data-bs-slide-to="${i}" class="${
+              i === 0 ? "active" : ""
+            }" aria-current="${i === 0 ? "true" : "false"}" aria-label="Slide ${
+              i + 1
+            }"></button>`;
+          })
+          .join("");
+
         const carousel = `
         <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">${indicators}</div>
           <div class="carousel-inner">${carouselItemsHTML.join("")}</div>
           <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -486,12 +500,13 @@ document.addEventListener("DOMContentLoaded", function () {
           </button>
         </div>
       `;
-        col.innerHTML += carousel;
+
+        box.innerHTML += carousel;
+        col.appendChild(box);
         previewContainer.appendChild(col);
       });
     });
 
-    // Hapus spinner setelah semua kelas selesai di-render
     Promise.all(renderTasks).then(() => {
       const spinner = document.querySelector(".spinner-border")?.parentElement;
       if (spinner) spinner.remove();
