@@ -674,7 +674,7 @@ window.requestExplain = async function () {
       document.getElementById("gradcamImage").src =
         "data:image/png;base64," + data.explanation_image;
 
-      document.getElementById("originalImagePreview").src =
+      document.getElementById("originalImage").src =
         document.getElementById("previewImage").src;
 
       document.getElementById("explainResult").classList.remove("d-none");
