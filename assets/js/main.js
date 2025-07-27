@@ -496,17 +496,19 @@ document.addEventListener("DOMContentLoaded", function () {
           .join("");
 
         const carousel = `
-        <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">${indicators}</div>
-          <div class="carousel-inner">${carouselItemsHTML.join("")}</div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </button>
-        </div>
-      `;
+          <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">${carouselItemsHTML.join("")}</div>
+            <div class="carousel-indicators mt-2 justify-content-center">
+              ${indicators}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        `;
 
         box.innerHTML += carousel;
         col.appendChild(box);
