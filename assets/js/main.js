@@ -663,17 +663,20 @@ window.requestExplain = async function () {
       method: "POST",
       body: formData,
     });
-    const data = await res.json();
+
+    const text = await res.text(); // Ambil response mentah
+    console.log("Respon Mentah:", text);
+
+    const data = JSON.parse(text); // Parse manual
+    console.log("Parsed JSON:", data);
 
     if (data.explanation_image) {
       document.getElementById("gradcamImage").src =
         "data:image/png;base64," + data.explanation_image;
 
-      // Tampilkan kembali gambar asli ke bagian interpretasi
       document.getElementById("originalImagePreview").src =
         document.getElementById("previewImage").src;
 
-      // Tampilkan seluruh panel interpretasi
       document.getElementById("explainResult").classList.remove("d-none");
     } else {
       alert("❌ Tidak ada gambar Grad-CAM yang diterima.");
