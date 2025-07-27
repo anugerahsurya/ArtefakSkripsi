@@ -62,14 +62,21 @@ const API_BASE =
   /**
    * Toggle mobile nav dropdowns
    */
-  document.querySelectorAll(".navmenu .toggle-dropdown").forEach((navmenu) => {
-    navmenu.addEventListener("click", function (e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle("active");
-      this.parentNode.nextElementSibling.classList.toggle("dropdown-active");
-      e.stopImmediatePropagation();
+  document
+    .querySelectorAll(".navmenu .dropdown > a")
+    .forEach((dropdownToggle) => {
+      dropdownToggle.addEventListener("click", function (e) {
+        // Cegah navigasi langsung
+        e.preventDefault();
+
+        const parentLi = this.parentElement;
+        const submenu = parentLi.querySelector(".dropdown-menu");
+
+        // Toggle class agar submenu tampil
+        parentLi.classList.toggle("active");
+        submenu.classList.toggle("dropdown-active");
+      });
     });
-  });
 
   /**
    * Scroll top button
