@@ -263,6 +263,13 @@
                     >
                       Identifikasi Fitur Penting pada Citra
                     </button>
+                    <button
+                      id="resetBtn"
+                      class="btn btn-outline-danger mt-1"
+                      onclick="resetAll()"
+                    >
+                      Reset
+                    </button>
                   </div>
                 </div>
               </div>
@@ -384,6 +391,40 @@
         gradcamImg.style.width = originalImg.offsetWidth + "px";
         gradcamImg.style.height = originalImg.offsetHeight + "px";
       };
+    </script>
+    <script>
+      function resetAll() {
+        // Reset file input
+        document.getElementById("imageUpload").value = "";
+
+        // Reset preview
+        const previewImage = document.getElementById("previewImage");
+        previewImage.src = "#";
+        previewImage.classList.add("d-none");
+
+        // Hide result
+        document.getElementById("classificationResult").classList.add("d-none");
+        document.getElementById("resultText").textContent = "...";
+
+        // Hide interpretasi
+        document.getElementById("explainResult").classList.add("d-none");
+        document.getElementById("originalImage").src = "";
+        document.getElementById("gradcamImage").src = "";
+
+        // Reset tombol
+        document.getElementById("classifyBtn").classList.add("d-none");
+        document.getElementById("explainBtn").classList.add("d-none");
+
+        // Reset kamera jika aktif
+        const video = document.getElementById("cameraPreview");
+        if (!video.paused) {
+          video.pause();
+          video.srcObject?.getTracks()?.forEach((t) => t.stop());
+        }
+
+        // Optional: reset kamera section
+        document.getElementById("cameraSection").classList.add("d-none");
+      }
     </script>
   </body>
 </html>
