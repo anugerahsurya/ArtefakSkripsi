@@ -624,6 +624,11 @@ document.addEventListener("DOMContentLoaded", () => {
             data.confidence * 100
           ).toFixed(2)}%)`;
           resultContainer.classList.replace("alert-danger", "alert-info");
+
+          // ✅ Tampilkan tombol interpretasi setelah sukses klasifikasi
+          if (explainBtn) {
+            explainBtn.classList.remove("d-none");
+          }
         }
       } catch (err) {
         resultText.textContent = "❌ Gagal terhubung ke server.";
