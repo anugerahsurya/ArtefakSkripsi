@@ -589,7 +589,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   if (classifyBtn) {
-    document.getElementById("explainBtn").classList.remove("d-none");
     document.getElementById("explainResult")?.classList.add("d-none");
     classifyBtn.addEventListener("click", async function () {
       resultText.textContent = "⏳ Memproses...";
