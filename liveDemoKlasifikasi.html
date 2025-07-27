@@ -242,38 +242,65 @@
                     class="img-fluid rounded mb-3 d-none"
                   />
                   <div class="d-grid gap-3">
-                    <!-- Tambahkan wrapper ini untuk merapikan tombol dan hasil -->
+                    <!-- Tombol Klasifikasi -->
                     <button id="classifyBtn" class="btn btn-primary d-none">
                       Klasifikasikan
                     </button>
+
+                    <!-- Hasil Klasifikasi -->
                     <div
                       id="classificationResult"
                       class="alert alert-info d-none m-0"
                     >
                       <strong>Hasil:</strong> <span id="resultText">...</span>
 
-                      <!-- Jika ingin ditambahkan interpretasi citra klasifikasi -->
+                      <!-- Penambahan bagian untuk interpretasi citra dengan grad-cam -->
                       <!-- Tombol Interpretasi -->
                       <button
                         id="explainBtn"
-                        class="btn btn-outline-primary d-none"
+                        class="btn btn-outline-primary mt-2"
                         onclick="requestExplain()"
                       >
                         Interpretasikan Fitur Klasifikasi Citra
                       </button>
-
-                      <!-- Hasil Grad-CAM -->
-                      <div id="explainResult" class="mt-3 d-none">
-                        <h6 class="text-muted">Visualisasi Grad-CAM:</h6>
-                        <img
-                          id="gradcamImage"
-                          class="img-fluid rounded shadow-sm border"
-                          alt="Grad-CAM"
-                        />
-                      </div>
-
-                      <!-- Batas penambahan fungsi Explainable AI -->
                     </div>
+
+                    <!-- Hasil Interpretasi -->
+                    <div
+                      id="explainResult"
+                      class="card shadow-sm rounded-4 p-3 d-none"
+                    >
+                      <h5 class="card-title text-center mb-3">
+                        Interpretasi Fitur Klasifikasi
+                      </h5>
+                      <div class="row justify-content-center">
+                        <!-- Gambar Asli -->
+                        <div class="col-md-6 text-center mb-3 mb-md-0">
+                          <p class="fw-semibold">Gambar Asli</p>
+                          <img
+                            id="originalImagePreview"
+                            src="#"
+                            alt="Gambar Asli"
+                            class="img-fluid rounded border"
+                            style="max-height: 250px"
+                          />
+                        </div>
+
+                        <!-- Grad-CAM -->
+                        <div class="col-md-6 text-center">
+                          <p class="fw-semibold">Visualisasi Grad-CAM</p>
+                          <img
+                            id="gradcamImage"
+                            src="#"
+                            alt="Grad-CAM"
+                            class="img-fluid rounded border"
+                            style="max-height: 250px"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Akhir dari bagian interpretasi -->
                   </div>
                 </div>
               </div>

@@ -668,6 +668,12 @@ window.requestExplain = async function () {
     if (data.explanation_image) {
       document.getElementById("gradcamImage").src =
         "data:image/png;base64," + data.explanation_image;
+
+      // Tampilkan kembali gambar asli ke bagian interpretasi
+      document.getElementById("originalImagePreview").src =
+        document.getElementById("previewImage").src;
+
+      // Tampilkan seluruh panel interpretasi
       document.getElementById("explainResult").classList.remove("d-none");
     } else {
       alert("❌ Tidak ada gambar Grad-CAM yang diterima.");
