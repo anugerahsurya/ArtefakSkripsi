@@ -251,6 +251,28 @@
                       class="alert alert-info d-none m-0"
                     >
                       <strong>Hasil:</strong> <span id="resultText">...</span>
+
+                      <!-- Jika ingin ditambahkan interpretasi citra klasifikasi -->
+                      <!-- Tombol Interpretasi -->
+                      <button
+                        id="explainBtn"
+                        class="btn btn-outline-primary d-none"
+                        onclick="requestExplain()"
+                      >
+                        Interpretasikan Fitur Klasifikasi Citra
+                      </button>
+
+                      <!-- Hasil Grad-CAM -->
+                      <div id="explainResult" class="mt-3 d-none">
+                        <h6 class="text-muted">Visualisasi Grad-CAM:</h6>
+                        <img
+                          id="gradcamImage"
+                          class="img-fluid rounded shadow-sm border"
+                          alt="Grad-CAM"
+                        />
+                      </div>
+
+                      <!-- Batas penambahan fungsi Explainable AI -->
                     </div>
                   </div>
                 </div>

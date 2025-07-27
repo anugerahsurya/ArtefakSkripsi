@@ -589,6 +589,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   if (classifyBtn) {
+    document.getElementById("explainBtn")?.classList.remove("d-none");
+    document.getElementById("explainResult")?.classList.add("d-none");
     classifyBtn.addEventListener("click", async function () {
       resultText.textContent = "⏳ Memproses...";
       resultContainer.classList.remove("d-none");
@@ -637,4 +639,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Switch Button Generate dan Klasifikasi
+// Fungsi Interpretasi Citra yang Diklasifikasikan
+window.requestExplain = async function () {
+  const imageInput = document.getElementById("imageUpload");
+  const previewImage = document.getElementById("previewImage");
+
+  const fileInput = imageInput.files[0];
+  let file;
+
+  if (fileInput) {
+    file = fileInput;
+  } else {
+    const dataURL = previewImage.src;
+    const blob = await (await fetch(dataURL)).blob();
+    file = new File([blob], "capture.png", { type: "image/png" });
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const res = await fetch(`${API_BASE}/predict?with_explain=true`, {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+
+    if (data.explanation_image) {
+      document.getElementById("gradcamImage").src =
+        "data:image/png;base64," + data.explanation_image;
+      document.getElementById("explainResult").classList.remove("d-none");
+    } else {
+      alert("❌ Tidak ada gambar Grad-CAM yang diterima.");
+    }
+  } catch (err) {
+    console.error("Gagal memuat Grad-CAM:", err);
+    alert("❌ Gagal menghubungi server untuk interpretasi.");
+  }
+};
