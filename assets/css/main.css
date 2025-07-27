@@ -3507,12 +3507,21 @@ table.table-bordered th {
   width: 100%;
 }
 
-#gradcamImage, #originalImagePreview {
+#gradcamImage,
+#originalImagePreview {
   object-fit: contain;
   background-color: #f8f9fa;
   padding: 6px;
 }
-
+.interpret-img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #dee2e6;
+}
 
 .tip-item {
   display: flex;

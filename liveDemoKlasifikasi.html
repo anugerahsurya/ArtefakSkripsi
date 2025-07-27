@@ -266,35 +266,24 @@
                     </div>
 
                     <!-- Hasil Interpretasi -->
-                    <div
-                      id="explainResult"
-                      class="card shadow-sm rounded-4 p-3 d-none"
-                    >
-                      <h5 class="card-title text-center mb-3">
+                    <div id="explainResult" class="mt-4 d-none">
+                      <h5 class="text-center mb-3 fw-bold">
                         Interpretasi Fitur Klasifikasi
                       </h5>
-                      <div class="row justify-content-center">
-                        <!-- Gambar Asli -->
-                        <div class="col-md-6 text-center mb-3 mb-md-0">
+                      <div class="row justify-content-center text-center">
+                        <div class="col-md-5">
                           <p class="fw-semibold">Gambar Asli</p>
                           <img
-                            id="originalImagePreview"
-                            src="#"
-                            alt="Gambar Asli"
-                            class="img-fluid rounded border"
-                            style="max-height: 250px"
+                            id="originalImage"
+                            class="img-fluid interpret-img"
                           />
                         </div>
-
-                        <!-- Grad-CAM -->
-                        <div class="col-md-6 text-center">
+                        <div class="col-md-5">
                           <p class="fw-semibold">Visualisasi Grad-CAM</p>
                           <img
                             id="gradcamImage"
-                            src="#"
+                            class="img-fluid interpret-img"
                             alt="Grad-CAM"
-                            class="img-fluid rounded border"
-                            style="max-height: 250px"
                           />
                         </div>
                       </div>
