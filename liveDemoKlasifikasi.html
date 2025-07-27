@@ -253,43 +253,52 @@
                       class="alert alert-info d-none m-0"
                     >
                       <strong>Hasil:</strong> <span id="resultText">...</span>
-
-                      <!-- Penambahan bagian untuk interpretasi citra dengan grad-cam -->
-                      <!-- Tombol Interpretasi -->
-                      <button
-                        id="explainBtn"
-                        class="btn btn-outline-primary mt-2"
-                        onclick="requestExplain()"
-                      >
-                        Interpretasikan Fitur Klasifikasi Citra
-                      </button>
                     </div>
 
-                    <!-- Hasil Interpretasi -->
-                    <div id="explainResult" class="mt-4 d-none">
-                      <h5 class="text-center mb-3 fw-bold">
-                        Interpretasi Fitur Klasifikasi
-                      </h5>
-                      <div class="row justify-content-center text-center">
-                        <div class="col-md-5">
-                          <p class="fw-semibold">Gambar Asli</p>
-                          <img
-                            id="originalImage"
-                            class="img-fluid interpret-img"
-                          />
-                        </div>
-                        <div class="col-md-5">
-                          <p class="fw-semibold">Visualisasi Grad-CAM</p>
-                          <img
-                            id="gradcamImage"
-                            class="img-fluid interpret-img"
-                            alt="Grad-CAM"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <!-- Tombol Interpretasi Dipindahkan ke Luar -->
+                    <button
+                      id="explainBtn"
+                      class="btn btn-outline-primary mt-2"
+                      onclick="requestExplain()"
+                    >
+                      Interpretasikan Fitur Klasifikasi Citra
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-                    <!-- Akhir dari bagian interpretasi -->
+              <!-- Hasil Interpretasi Dipisah Container -->
+              <div id="explainResult" class="card shadow-sm mt-4 d-none">
+                <div class="card-body text-center">
+                  <h5 class="mb-3 fw-bold">Interpretasi Fitur Klasifikasi</h5>
+                  <div class="row justify-content-center text-center">
+                    <div class="col-md-5 mb-3">
+                      <p class="fw-semibold">Gambar Asli</p>
+                      <img
+                        id="originalImage"
+                        class="img-fluid interpret-img"
+                        style="
+                          max-width: 100%;
+                          height: auto;
+                          border: 1px solid #ccc;
+                          padding: 4px;
+                        "
+                      />
+                    </div>
+                    <div class="col-md-5 mb-3">
+                      <p class="fw-semibold">Visualisasi Grad-CAM</p>
+                      <img
+                        id="gradcamImage"
+                        class="img-fluid interpret-img"
+                        alt="Grad-CAM"
+                        style="
+                          max-width: 100%;
+                          height: auto;
+                          border: 1px solid #ccc;
+                          padding: 4px;
+                        "
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
