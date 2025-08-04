@@ -305,15 +305,20 @@
                       Rata-rata per kelas, ACGAN menunjukkan kemiripan
                       distribusi fitur antara data sintetis dan data nyata
                       karena nilai KID yang mendekati nol. Temuan ini konsisten
-                      dengan studi sebelumnya [28], yang menyatakan bahwa ACGAN
-                      mampu menghasilkan citra yang tidak hanya tampak realistis
-                      tetapi juga sesuai dengan label yang diberikan.
-                      Sebaliknya, model cVAE menunjukkan kualitas citra yang
-                      cenderung kabur, mencerminkan ketidaksesuaian dalam
-                      distribusi fitur jika dibandingkan dengan data nyata. Hal
-                      ini sejalan dengan temuan dari penelitian sebelumnya [44],
-                      yang menjelaskan bahwa hasil citra dari VAE cenderung blur
-                      akibat keterbatasan asumsi distribusi Gaussian dalam
+                      dengan studi sebelumnya
+                      <a href="http://arxiv.org/abs/1610.09585" target="_blank"
+                        >(Odena et al., 2016)</a
+                      >, yang menyatakan bahwa ACGAN mampu menghasilkan citra
+                      yang tidak hanya tampak realistis tetapi juga sesuai
+                      dengan label yang diberikan. Sebaliknya, model cVAE
+                      menunjukkan kualitas citra yang cenderung kabur,
+                      mencerminkan ketidaksesuaian dalam distribusi fitur jika
+                      dibandingkan dengan data nyata. Hal ini sejalan dengan
+                      temuan dari penelitian sebelumnya
+                      <a href="10.1088/1742-6596/2634/1/012042" target="_blank"
+                        >(He., 2023)</a
+                      >, yang menjelaskan bahwa hasil citra dari VAE cenderung
+                      blur akibat keterbatasan asumsi distribusi Gaussian dalam
                       proses rekonstruksi.
                     </p>
                   </div>
@@ -327,12 +332,14 @@
                       dengan nilai FJD yang lebih rendah, menandakan tingkat
                       kemiripan dan kesesuaian label yang lebih baik
                       dibandingkan model lainnya. Temuan ini sejalan dengan
-                      hasil penelitian sebelumnya [25], yang menyatakan bahwa
-                      model DDPM mampu menghasilkan citra berkualitas tinggi
-                      dengan distribusi yang lebih menyerupai data nyata melalui
-                      proses denoising bertahap yang stabil, terutama ketika
-                      digunakan dalam skenario generatif bersyarat (conditional
-                      generative model).
+                      hasil penelitian sebelumnya
+                      <a href="http://arxiv.org/abs/2006.11239" target="_blank"
+                        >(Ho et al., 2020)</a
+                      >, yang menyatakan bahwa model DDPM mampu menghasilkan
+                      citra berkualitas tinggi dengan distribusi yang lebih
+                      menyerupai data nyata melalui proses denoising bertahap
+                      yang stabil, terutama ketika digunakan dalam skenario
+                      generatif bersyarat (conditional generative model).
                     </p>
                   </div>
                 </div>
@@ -343,15 +350,18 @@
                     <p class="lead explanation">
                       Pada metrik area di bawah kurva PRD, ACGAN kembali
                       menunjukkan performa terbaik di semua ukuran citra. Temuan
-                      ini didukung oleh studi [45], yang mengusulkan PRD sebagai
-                      metrik yang lebih representatif dalam mengevaluasi
-                      keseimbangan antara kemiripan terhadap data nyata dan
-                      keberagaman data sintetis. ACGAN terbukti mampu
-                      mempertahankan kedua aspek tersebut dengan lebih baik.
-                      Sebaliknya, model cVAE mencatatkan nilai terendah, yang
-                      mengindikasikan ketidakmampuannya dalam menghasilkan citra
-                      sintetis yang sekaligus menyerupai data nyata dan memiliki
-                      variasi yang cukup.
+                      ini didukung oleh studi
+                      <a href="http://arxiv.org/abs/1806.00035" target="_blank"
+                        >(Sajjadi et al., 2018)</a
+                      >, yang mengusulkan PRD sebagai metrik yang lebih
+                      representatif dalam mengevaluasi keseimbangan antara
+                      kemiripan terhadap data nyata dan keberagaman data
+                      sintetis. ACGAN terbukti mampu mempertahankan kedua aspek
+                      tersebut dengan lebih baik. Sebaliknya, model cVAE
+                      mencatatkan nilai terendah, yang mengindikasikan
+                      ketidakmampuannya dalam menghasilkan citra sintetis yang
+                      sekaligus menyerupai data nyata dan memiliki variasi yang
+                      cukup.
                     </p>
                   </div>
                 </div>
@@ -367,13 +377,19 @@
                       model CDDPM mencatatkan waktu terlama. Temuan ini sejalan
                       dengan trilemma dalam pembelajaran generatif, di mana
                       CDDPM diketahui memiliki kelemahan dalam aspek fast
-                      sampling [20]. Secara keseluruhan, jika mengacu pada
-                      evaluasi melalui metrik KID, FJD, dan PRD-AUC yang
-                      seluruhnya didominasi oleh ACGAN, dapat disimpulkan bahwa
-                      arsitektur ACGAN berkontribusi signifikan dalam mengatasi
-                      permasalahan mode collapse. Hal ini berdampak langsung
-                      pada peningkatan keberagaman data sintetis yang dihasilkan
-                      [18], menunjukkan bahwa tantangan terkait cakupan mode dan
+                      sampling
+                      <a href="http://arxiv.org/abs/2112.07804" target="_blank"
+                        >(Xiao et al., 2021)</a
+                      >. Secara keseluruhan, jika mengacu pada evaluasi melalui
+                      metrik KID, FJD, dan PRD-AUC yang seluruhnya didominasi
+                      oleh ACGAN, dapat disimpulkan bahwa arsitektur ACGAN
+                      berkontribusi signifikan dalam mengatasi permasalahan mode
+                      collapse. Hal ini berdampak langsung pada peningkatan
+                      keberagaman data sintetis yang dihasilkan<a
+                        href="http://arxiv.org/abs/1610.09585"
+                        target="_blank"
+                        >(Xiao et al., 2021)</a
+                      >, menunjukkan bahwa tantangan terkait cakupan mode dan
                       keberagaman dalam model GAN dapat diatasi secara efektif
                       melalui pendekatan ACGAN.
                     </p>
