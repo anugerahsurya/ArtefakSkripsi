@@ -688,7 +688,7 @@ window.requestExplain = async function () {
         "data:image/png;base64," + data.explanation_image;
 
       document.getElementById("originalImage").src =
-        document.getElementById("previewImage").src;
+        "data:image/png;base64," + data.processed_image;
 
       document.getElementById("explainResult").classList.remove("d-none");
     } else {
